@@ -7,7 +7,7 @@
 
   var CONFIG = {
     // URL веб-приложения Google Apps Script (backend/Code.js). Пусто — ответы копятся в браузере.
-    endpoint: '',
+    endpoint: 'https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec',
     // Ссылка-приглашение в закрытый канал предзаписи. Пусто — после анкеты ведём к команде.
     channelUrl: '',
     teamUrl: 'https://t.me/kerryhelper',
