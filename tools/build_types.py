@@ -8,7 +8,7 @@ import json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "..", "..", "raboty", "test-types.md")
 DST = os.path.join(HERE, "..", "types.js")
-IDS = {"Советчица": "sovet", "Правдорубка": "pravda", "Рассказчица": "rasskaz",
+IDS = {"Эксперт": "expert", "Советчица": "sovet", "Правдорубка": "pravda", "Рассказчица": "rasskaz",
        "Своя в доску": "svoya", "Смелая": "smelaya", "Гид": "gid"}
 
 md = open(SRC, encoding="utf-8").read()
@@ -43,7 +43,7 @@ for body in blocks:
     assert len(reels) == 5 and len(topics) >= 12, (name, len(reels), len(topics))
     types.append(t)
 
-assert len(types) == 6
+assert len(types) == 7
 with open(DST, "w", encoding="utf-8") as f:
     f.write("/* Сгенерировано из raboty/test-types.md: python3 tools/build_types.py. Руками не править. */\n")
     f.write("window.TYPES = " + json.dumps(types, ensure_ascii=False, indent=1) + ";\n")
