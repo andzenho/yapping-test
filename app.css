@@ -265,6 +265,9 @@ p, li { text-wrap: pretty; }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
 /* Как проходят 40 дней: путь по дням */
+.facts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.facts li { padding: 7px 12px; background: var(--white); border: 1.5px solid var(--on-cream-line); border-radius: 10px; font-size: 14px; font-weight: 800; line-height: 1.3; }
+.facts .facts__date { background: var(--ink); border-color: var(--ink); color: var(--white); }
 .path { list-style: none; margin-top: 20px; position: relative; }
 .path::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 40px; width: 2px; background: var(--on-pink-line); }
 .path > li { position: relative; padding: 0 0 26px 34px; }
