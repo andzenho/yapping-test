@@ -110,7 +110,7 @@ p, li { text-wrap: pretty; }
   min-height: 60px;
   padding: 18px 26px;
   border-radius: 999px;
-  background: var(--terra);
+  background: #B04F2E;
   color: var(--cream);
   font-family: var(--f-display);
   font-weight: 800;
@@ -256,7 +256,7 @@ p, li { text-wrap: pretty; }
 .case__story { margin-top: 16px; font-size: 17px; line-height: 1.45; }
 .case__shots { display: flex; gap: 10px; margin: 16px -16px 0 0; padding-right: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .case__shots::-webkit-scrollbar { display: none; }
-.shot { flex: none; width: 64%; height: min(420px, 110vw); padding: 0; border: 0; border-radius: 14px; overflow: hidden; background: #0C0F14; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; cursor: zoom-in; box-shadow: 0 12px 28px -18px rgba(31, 31, 31, .6); }
+.shot { flex: none; width: 64%; height: min(360px, 95vw); padding: 0; border: 0; border-radius: 14px; overflow: hidden; background: #0C0F14; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; cursor: zoom-in; box-shadow: 0 12px 28px -18px rgba(31, 31, 31, .6); }
 .shot--wide { width: 88%; }
 .case__shots--one { justify-content: center; margin-right: 0; padding-right: 0; }
 .case__shots--one .shot { width: 100%; height: auto; background: none; }
@@ -317,10 +317,8 @@ p, li { text-wrap: pretty; }
 .lessons li b { flex: none; width: 30px; height: 30px; border-radius: 8px; background: var(--soft); color: var(--terra-ink); font-family: 'Unbounded', sans-serif; font-size: 13px; display: flex; align-items: center; justify-content: center; }
 .lessons li span { font-size: 16px; font-weight: 700; line-height: 1.4; padding-top: 4px; }
 
-.guides { margin-top: 14px; }
-.guides__head { font-weight: 800; font-size: 16px; }
-.guides ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.guides li { padding: 7px 12px; background: var(--white); border: 1.5px solid var(--on-cream-line); border-radius: 10px; font-size: 14px; font-weight: 700; line-height: 1.3; }
+.guides { font-size: 16px; line-height: 1.45; }
+.guides b { font-weight: 800; }
 .review__cap { margin-top: 22px; font-size: 14px; font-weight: 800; color: var(--terra-ink); }
 .loop__tasks-cap { margin-top: 14px; font-size: 14px; font-weight: 800; }
 .loop__tasks { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }

@@ -465,7 +465,7 @@
       '<section class="band magnet" id="magnet"><div class="col">' +
         '<h2 class="title">Что дальше?</h2>' +
         '<p class="lead gap-14">Ты узнала свой тип блогера и получила первые идеи для роликов. Теперь посмотри видео, где я показываю, как снять 30 рилс за 40 дней</p>' +
-        '<button class="vcard gap-20" data-act="form" aria-label="Получить видео «Как снять 30 рилс за 40 дней»">' +
+        '<button class="vcard gap-20" data-act="form">' +
           '<span class="vcard__bg" aria-hidden="true"></span>' +
           '<span class="vcard__play" aria-hidden="true"></span>' +
           '<span class="vcard__title">Как снять 30 рилс за 40 дней</span>' +
@@ -492,7 +492,7 @@
               '<div class="loop__step"><b>1</b><p>Получаешь задание, про что снять видео сегодня</p></div>' +
               '<div class="loop__step"><b>2</b><p>Снимаешь и выкладываешь</p></div>' +
               '<div class="loop__step"><b>3</b><p>Куратор даёт обратную связь. Говорит, что работает, а что поправить. Если первая фраза не цепляет, переписывает её за тебя</p></div>' +
-              '<p class="loop__tasks-cap">Какие бывают задания</p><ul class="loop__tasks"><li>Твой обычный день, которого никто не видел</li><li>Мнение, с которым ты не согласна</li><li>Вопрос, который тебе задают постоянно</li><li>Ролик из комментария</li><li>Ролик-реакция</li><li>Ролик, который пересылают</li><li>Месяц назад я…</li><li>Ошибка, которая меня научила</li></ul>' +
+              '<p class="loop__tasks-cap">Какие бывают задания</p><ul class="loop__tasks"><li>Твой обычный день, которого никто не видел</li><li>Вопрос, который тебе задают постоянно</li><li>Ролик-реакция</li><li>Месяц назад я…</li><li>Ошибка, которая меня научила</li></ul>' +
               '<p class="loop__again">↻ И так каждый день, в воскресенье выходной. Пропустила, догонишь, задания не сгорают</p>' +
             '</div>' +
             '<p class="path__note"><b>Кто твой куратор.</b> Все мои кураторы действующие блогеры и консультанты по контенту с большим опытом обучения</p>' +
@@ -506,7 +506,7 @@
         '<h3 class="title gap-36" style="font-size:22px">Что ты узнаешь на уроках!</h3>' +
         '<p class="gap-10">Уроки выходят по ходу Игры, каждый ровно тогда, когда он тебе нужен</p>' +
         '<div class="lessons"><p class="lessons__head">12 уроков и 2 эфира со мной</p><ol><li><b>1</b><span>Как найти свою тему для блога</span></li><li><b>2</b><span>Как снимать рилсы по методу ЯППИНГ. Этим методом я снимаю все свои ролики уже 6 лет</span></li><li><b>3</b><span>Контент-план на 30 роликов и как разогнать одну тему на шесть</span></li><li><b>4</b><span>Монтаж рилсов. Разбор от куратора</span></li><li><b>5</b><span>Как говорить на камеру и не зажиматься</span></li><li><b>6</b><span>Тренды. Какие ролики дают просмотры, а какие подписчиков</span></li><li><b>7</b><span>Что делать, если ролик залетел или просели охваты</span></li><li><b>8</b><span>Где я беру идеи и что делать, если кажется, что рассказать нечего</span></li><li><b>9</b><span>Как работают алгоритмы и почему у всех они работают по-разному</span></li><li><b>10</b><span>Мой урок по монтажу</span></li><li><b>11</b><span>Телеграм-канал. Зачем он тебе и как туда перевести людей</span></li><li><b>12</b><span>Деньги с блога. Бартер, реклама, первые продажи</span></li></ol></div>' +
-        '<div class="guides"><p class="guides__head">И ещё 10 гайдов</p><ul><li>Свет, кадр и оборудование</li><li>Первая фраза, после которой не пролистнут</li><li>Как реагировать на хейт</li><li>Как найти свою фишку в блоге</li><li>Как разогнать одну тему на 6 роликов</li><li>Что сделать, если ролик не идёт</li><li>Что написать в шапке, чтобы подписывались</li><li>Как показать себя в рабочем аккаунте и не растерять клиентов</li><li>Пробный режим. Как им пользоваться</li><li>Что смотреть в статистике после ролика</li></ul></div>' +
+        '<p class="guides gap-14"><b>И ещё 10 гайдов.</b> Свет и кадр, первая фраза, шапка профиля, хейт, пробный режим, статистика и другие</p>' +
         '<p class="review__cap">Отзыв ученицы, которая прошла Большую Игру и смотрела уроки</p>' +
         '<button class="chat chat--pad gap-10" data-act="zoom" data-src="assets/cases/chat-lessons.jpg" aria-label="Открыть отзыв"><img src="assets/cases/chat-lessons.jpg" alt="Отзыв ученицы: мне очень понравились уроки Карины, чётко по делу, она поделилась своей кухней, стало понятнее, как снимать ролики, на 1000%" loading="lazy"></button>' +
         '<h3 class="title gap-36" style="font-size:22px">Что было в первом потоке!</h3>' +
@@ -533,12 +533,12 @@
             '<div class="case__stats"><div><b>350 тыс.</b><span>просмотров у второго рилса в Игре</span></div><div><b>6 797</b><span>подписчиков сейчас, было 2 400</span></div></div>' +
             '<p class="case__story">Блог несколько лет стоял на 2 400 подписчиках. В Игре она записала 3 рилса, и они выстрелили. Второй, «Куда делись мужики?!», в первые дни набрал 125 тысяч, а сейчас у него 350 тысяч просмотров и почти тысяча комментариев</p>' +
             shots('olga') +
-            '<div class="chats gap-14"><button class="chat" data-act="zoom" data-src="assets/cases/chat-olga-125k.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-olga-125k.jpg" alt="Ольга в чате Игры: сняла второй рилс, залетел на 125 тысяч, такого не было" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-olga.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-olga.jpg" alt="Ольга: блог про тревогу стоял на 2400 несколько лет, записала 3 рилса, и они выстрелили" loading="lazy"></button></div>' +
+            '<div class="chats gap-14"><button class="chat" data-act="zoom" data-src="assets/cases/chat-olga-125k.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-olga-125k.jpg" alt="Ольга в чате Игры: сняла второй рилс, залетел на 125 тысяч, такого не было" loading="lazy"></button></div>' +
             '<p class="case__q">«Вы очень круто даёте понимание, что делать. Много где училась, но таких тонкостей не видела»</p>' +
           '</article>' +
         '</div>' +
         '<h3 class="title gap-36" style="font-size:22px">И ещё из чата участниц!</h3>' +
-        '<div class="chats"><div class="qcard"><p class="qcard__who">VELUNOVA<small>чат Игры, 23.08</small></p><p class="qcard__num">72 741</p><p class="qcard__lbl">просмотр у пробного рилса «Каждый раз в Швейцарии»</p><p class="qcard__q">«За сутки 😁 Это лучшее решение войти в Большую Игру»</p><button class="chat" data-act="zoom" data-src="assets/cases/velunova-72k.jpg" aria-label="Открыть скрин"><img src="assets/cases/velunova-72k.jpg" alt="VELUNOVA: пробный рилс «Каждый раз в Швейцарии», 72 741 просмотр" loading="lazy"></button></div><button class="chat" data-act="zoom" data-src="assets/cases/chat-anon-stats.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-anon-stats.jpg" alt="Статистика рилса участницы: 35 700 просмотров, 136 подписок" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-viktoria.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-viktoria.jpg" alt="Виктория: ролик залетел, я все ваши советы использовала" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-saikho-47k.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-saikho-47k.jpg" alt="Сайхо: рилс, где я ем и комментирую вкус продукта, набрал 47 тысяч просмотров" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-velunova-blogger.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-velunova-blogger.jpg" alt="VELUNOVA: осознаю, что за этот месяц реально обучусь мыслить как блогер" loading="lazy"></button></div>' +
+        '<div class="chats"><div class="qcard"><p class="qcard__who">VELUNOVA<small>чат Игры, 23.08</small></p><p class="qcard__num">72 741</p><p class="qcard__lbl">просмотр у пробного рилса «Каждый раз в Швейцарии»</p><p class="qcard__q">«За сутки 😁 Это лучшее решение войти в Большую Игру»</p><button class="chat" data-act="zoom" data-src="assets/cases/velunova-72k.jpg" aria-label="Открыть скрин"><img src="assets/cases/velunova-72k.jpg" alt="VELUNOVA: пробный рилс «Каждый раз в Швейцарии», 72 741 просмотр" loading="lazy"></button></div><button class="chat" data-act="zoom" data-src="assets/cases/chat-viktoria.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-viktoria.jpg" alt="Виктория: ролик залетел, я все ваши советы использовала" loading="lazy"></button></div>' +
       '</div></section>' +
 
       '<section class="band band--ink" id="ap"><div class="col">' +
@@ -557,12 +557,9 @@
         '<div class="faq">' +
           '<p><b>Я уже покупала курсы, толку не было.</b> Обычно курс даёт уроки, а снимать оставляет тебе. Тут ты каждый день снимаешь по заданию, а куратор говорит, что поправить. Просто смотреть уроки не получится</p>' +
           '<p><b>А ты сама там будешь?</b> Главные уроки мои, метод мой. На двух эфирах отвечаю на твои вопросы вживую. Каждый твой ролик разбирает куратор</p>' +
-          '<p><b>Это оплата?</b> Нет. Анкета бесплатная и ни к чему не обязывает</p>' +
           '<p><b>Мне будут названивать?</b> Нет. Моя команда напишет один раз в Телеграм. Созвон, только если сама попросишь консультацию</p>' +
-          '<p><b>Я ещё не решила.</b> Для этого и канал. Посмотри видео и эфиры, а решишь потом</p>' +
           '<p><b>Я ни разу не снимала, мне страшно.</b> Сайхо тоже ни разу не снимала. Первый рилс в жизни она сняла на второй день Игры. Первую неделю ты снимаешь 3 пробных ролика вместе с мини-группой и куратором. Одна не останешься</p>' +
           '<p><b>Работа, дети, нет времени.</b> Сайхо во время Игры работала и училась. На всё она не успевала, а её ролики за месяц набрали 474 тысячи просмотров. Задания не сгорают, догонишь в своём темпе</p>' +
-          '<p><b>Боюсь, что увидят на работе.</b> Про работу можно вообще не снимать. Тему в первую неделю выбираешь с куратором, и она может быть совсем не про работу</p>' +
           '<p><b>Мне нужны клиенты, а не просмотры.</b> Заявки с первых роликов не обещаю. Клиенты приходят к той, кого видят каждый день и кому верят. Маша психолог, за Игру выложила 43 ролика, подписчиков стало 2 166 вместо 747. А про первые продажи с блога есть отдельный урок</p>' +
           '<p><b>Я живу не в России.</b> Оплата картой любой страны</p>' +
         '</div>' +
