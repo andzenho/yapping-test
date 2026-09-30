@@ -121,6 +121,7 @@ p, li { text-wrap: pretty; }
   box-shadow: 0 12px 26px -16px rgba(92, 43, 46, .95);
   transition: transform .15s var(--ease), opacity .2s;
 }
+.btn--long { font-size: 16px; line-height: 1.25; padding: 14px 22px; }
 .btn:active { transform: scale(.985); }
 .btn[disabled] { opacity: .4; box-shadow: none; }
 .btn--line { background: transparent; border: 2px solid currentColor; box-shadow: none; }
@@ -366,7 +367,7 @@ p, li { text-wrap: pretty; }
   transition: transform .3s var(--ease);
 }
 .sticky-cta.is-on { transform: none; }
-.sticky-cta .btn { max-width: var(--col); margin: 0 auto; min-height: 54px; font-size: 16px; white-space: nowrap; }
+.sticky-cta .btn { max-width: var(--col); margin: 0 auto; min-height: 54px; font-size: 15px; line-height: 1.2; padding-top: 10px; padding-bottom: 10px; }
 
 /* ── Анкета ───────────────────────────────────────────── */
 .form-screen { background: var(--white); color: var(--ink); }
