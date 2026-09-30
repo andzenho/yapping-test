@@ -326,7 +326,7 @@
     return '<section class="screen start"><div class="col">' +
       '<p class="start__hi">Привет' + (name ? ', ' + esc(name) : '') + '! Это Карина</p>' +
       '<div class="start__body">' +
-        '<h1 class="display">Не знаешь, про что <span class="label label--slap">снимать?</span></h1>' +
+        '<h1 class="display">Не знаешь, про что снимать?</h1>' +
         '<p class="start__sub">За 3 минуты скажу, какой ты блогер и на какие темы тебе снимать, чтобы набирать просмотры и подписчиков</p>' +
         '<ul class="start__get"><li>Твой тип блогера</li><li>15 тем под тебя</li><li>5 готовых роликов</li></ul>' +
       '</div>' +
@@ -461,10 +461,15 @@
     if (!h) return;
     var lab = h.querySelector('.label');
     var fit = function () {
-      if (!lab) return;
-      lab.style.fontSize = '';
-      var size = parseFloat(getComputedStyle(lab).fontSize);
-      while (lab.offsetWidth > h.clientWidth && size > 24) { size -= 1; lab.style.fontSize = size + 'px'; }
+      if (lab) {
+        lab.style.fontSize = '';
+        var ls = parseFloat(getComputedStyle(lab).fontSize);
+        while (lab.offsetWidth > h.clientWidth && ls > 24) { ls -= 1; lab.style.fontSize = ls + 'px'; }
+        return;
+      }
+      h.style.fontSize = '';
+      var size = parseFloat(getComputedStyle(h).fontSize);
+      while (h.scrollWidth > h.clientWidth && size > 28) { size -= 1; h.style.fontSize = size + 'px'; }
     };
     fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   }
