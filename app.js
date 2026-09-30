@@ -376,11 +376,14 @@
   }
 
   /* Скрины кейсов: assets/cases/<имя>-1.jpg … Пока файлов нет, блок не выводится */
-  var CASE_SHOTS = { saikho: [], masha: [] };
+  var CASE_SHOTS = {
+    saikho: [['saikho-2.jpg', 'Статистика Сайхо с 27 августа по 25 сентября: 474,2 тысячи просмотров, 395 новых подписчиков', 1], ['saikho-1.jpg', 'Профиль Сайхо: 543 подписчика, 474 тысячи просмотров за 30 дней, ролик на 71 тысячу']],
+    masha: [['masha-1.jpg', 'Статистика Маши за август: 251 тысяча просмотров, в 15 раз больше, чем в июле'], ['masha-2.jpg', 'Профиль Маши: 2 166 подписчиков']]
+  };
   function shots(id) {
     var list = CASE_SHOTS[id] || [];
     if (!list.length) return '';
-    return '<div class="case__shots">' + list.map(function (f) { return '<img src="assets/cases/' + f + '" alt="" loading="lazy">'; }).join('') + '</div>';
+    return '<div class="case__shots">' + list.map(function (f) { return '<button class="shot' + (f[2] ? ' shot--wide' : '') + '" data-act="zoom" data-src="assets/cases/' + f[0] + '" aria-label="Открыть скрин"><img src="assets/cases/' + f[0] + '" alt="' + esc(f[1]) + '" loading="lazy"></button>'; }).join('') + '</div><p class="shots__hint">Листай и нажми, чтобы увеличить</p>';
   }
 
   function vResult() {
@@ -448,14 +451,14 @@
         '<p class="lead gap-14">За 40 дней снимешь 30 роликов и найдёшь свои темы, которые набирают десятки тысяч просмотров и приводят подписчиков</p>' +
         '<p class="gap-14">Даже если сейчас не знаешь, о чём снимать, кажешься себе кринжем и боишься, что осудят знакомые</p>' +
         '<p class="small gap-14">Старт ' + esc(CONFIG.gameStart) + '</p>' +
-        '<h3 class="title gap-36" style="font-size:22px">Как это устроено</h3>' +
-        '<ul class="offer__list">' +
-          '<li>Первую неделю вместе с куратором находишь, про что ты блогер</li>' +
-          '<li>Дальше каждое утро берёшь задание под свою тему и снимаешь</li>' +
-          '<li>Куратор с тобой все 40 дней и разбирает каждый ролик. Если первая фраза не цепляет, переписывает её за тебя</li>' +
-          '<li>Я даю уроки по методу и 2 эфира, где отвечаю на твои вопросы</li>' +
-          '<li>Через 40 дней у тебя 30 роликов, и по статистике ты видишь, что снимать дальше</li>' +
-        '</ul>' +
+        '<h3 class="title gap-36" style="font-size:22px">Как проходят 40 дней</h3>' +
+        '<ol class="path">' +
+          '<li><span class="path__when">Неделя 1</span><p class="path__what">Находишь, про что ты блогер</p><p>Проходишь мои уроки, на разборе в мини-группе с куратором выбираешь тему и снимаешь 3 пробных ролика</p></li>' +
+          '<li><span class="path__when">Каждое утро</span><p class="path__what">Берёшь задание и снимаешь</p><p>Задание под твою тему, и к нему 4 первые фразы на выбор. Пропустила день, догонишь, задания не сгорают</p></li>' +
+          '<li><span class="path__when">Каждый ролик</span><p class="path__what">Куратор разбирает, что поправить</p><p>Говорит, что работает. Если первая фраза не цепляет, переписывает её за тебя. Он с тобой все 40 дней</p></li>' +
+          '<li><span class="path__when">2 эфира</span><p class="path__what">Задаёшь вопросы мне</p><p>Вживую отвечаю на всё, что накопилось</p></li>' +
+          '<li class="path__end"><span class="path__when">День 40</span><p class="path__what">30 роликов в профиле</p><p>По статистике видишь, какие темы набирают просмотры и приводят подписчиков. И знаешь, что снимать дальше</p></li>' +
+        '</ol>' +
         '<h3 class="title gap-36" style="font-size:22px">Что было в первом потоке</h3>' +
         '<div class="cases">' +
           '<article class="case">' +
@@ -591,6 +594,13 @@
     else if (act === 'restart') { var keep = S.form; S = fresh(); S.form = keep; save(); go('start'); }
     else if (act === 'pick') pick(el.getAttribute('data-v'));
     else if (act === 'next') finishQuiz();
+    else if (act === 'zoom') {
+      var box = document.createElement('div');
+      box.className = 'zoom';
+      box.innerHTML = '<img src="' + el.getAttribute('data-src') + '" alt=""><span>Закрыть</span>';
+      box.addEventListener('click', function () { box.remove(); });
+      document.body.appendChild(box);
+    }
     else if (act === 'copy-topics') {
       var r = S.result, t = TYPES[r.main];
       var text = 'Я ' + t.name + '. Мои темы для роликов:\n' + pickTopics(r).map(function (x, i) { return (i + 1) + '. ' + x; }).join('\n');

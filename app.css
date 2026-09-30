@@ -234,8 +234,30 @@ p, li { text-wrap: pretty; }
 .case__stats b { display: block; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: clamp(22px, 7vw, 30px); line-height: 1; letter-spacing: -.02em; color: var(--pink-ink); white-space: nowrap; }
 .case__stats span { display: block; margin-top: 6px; font-size: 15px; font-weight: 700; line-height: 1.3; }
 .case__story { margin-top: 16px; font-size: 17px; line-height: 1.45; }
-.case__shots { display: flex; gap: 10px; margin-top: 16px; overflow-x: auto; scroll-snap-type: x mandatory; }
-.case__shots img { width: 46%; flex: none; border-radius: 12px; border: 1.5px solid var(--on-pink-line); scroll-snap-align: start; }
+.case__shots { display: flex; gap: 10px; margin: 16px -16px 0 0; padding-right: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.case__shots::-webkit-scrollbar { display: none; }
+.shot { flex: none; width: 64%; height: min(420px, 110vw); padding: 0; border: 0; border-radius: 14px; overflow: hidden; background: #0C0F14; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; cursor: zoom-in; box-shadow: 0 12px 28px -18px rgba(31, 31, 31, .6); }
+.shot--wide { width: 88%; }
+.shots__hint { margin-top: 8px; font-size: 14px; font-weight: 700; color: var(--on-pink-soft); }
+.shot img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.zoom { position: fixed; inset: 0; z-index: 50; background: rgba(20, 20, 20, .92); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 20px 16px; cursor: zoom-out; animation: fade .2s ease both; }
+.zoom img { max-width: 100%; max-height: calc(100% - 48px); border-radius: 14px; }
+.zoom span { color: var(--white); font-weight: 800; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Как проходят 40 дней: путь по дням */
+.path { list-style: none; margin-top: 20px; position: relative; }
+.path::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 40px; width: 2px; background: var(--on-pink-line); }
+.path li { position: relative; padding: 0 0 26px 34px; }
+.path li::before { content: ''; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--soft); border: 3px solid var(--pink); box-sizing: border-box; }
+.path__when { display: block; font-size: 14px; font-weight: 800; color: var(--terra-ink); }
+.path__what { margin-top: 4px; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.25; }
+.path li > p:last-child { margin-top: 6px; font-size: 16px; line-height: 1.45; color: var(--on-pink-soft); }
+.path .path__end { margin-top: 4px; padding: 20px 18px 20px 52px; background: var(--ink); color: var(--white); border-radius: 14px; }
+.path .path__end::before { left: 18px; top: 24px; background: var(--pink); border-color: var(--pink); }
+.path .path__end .path__when { color: var(--pink); }
+.path .path__end .path__what { font-size: 24px; }
+.path .path__end > p:last-child { color: rgba(255, 255, 255, .82); }
 .nw { white-space: nowrap; }
 .case__q { margin-top: 14px; padding-left: 14px; border-left: 3px solid var(--pink); font-size: 17px; line-height: 1.4; font-style: italic; }
 
