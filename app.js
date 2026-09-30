@@ -465,13 +465,14 @@
         '<h2 class="title">Что дальше?</h2>' +
         '<p class="lead gap-14">Ты узнала свой тип блогера и получила первые идеи для роликов. Теперь посмотри видео, где я показываю, как снять 30 рилс за 40 дней</p>' +
         '<button class="vcard gap-20" data-act="form" aria-label="Получить видео «Как снять 30 рилс за 40 дней»">' +
+          '<span class="vcard__bg" aria-hidden="true"></span>' +
           '<span class="vcard__play" aria-hidden="true"></span>' +
           '<span class="vcard__title">Как снять 30 рилс за 40 дней</span>' +
           '<span class="vcard__by">Видео от Карины</span>' +
         '</button>' +
-        '<p class="gap-20">Видео лежит в закрытом канале предзаписи на Большую Игру 2.0. Заполни короткую анкету, и канал откроется сразу</p>' +
+        '<p class="gap-20">Видео лежит в закрытом канале. Заполни короткую анкету, и канал откроется сразу</p>' +
         '<button class="btn gap-20" data-act="form">Получить видео</button>' +
-        '<p class="small gap-10">Анкета предзаписи. 2 минуты, бесплатно, это не оплата</p>' +
+        '<p class="small gap-10">Это анкета предзаписи на Большую Игру 2.0, моё обучение блогингу с кураторами. Старт ' + esc(CONFIG.gameStart) + '. Заполнить 2 минуты, это бесплатно</p>' +
       '</div></section>' +
 
       '<section class="band band--soft" id="offer"><div class="col">' +
