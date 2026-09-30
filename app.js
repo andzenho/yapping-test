@@ -400,11 +400,17 @@
     }).join('');
     var topics = pickTopics(r).map(function (x) { return '<li>' + q2(esc(x)) + '</li>'; }).join('');
     var reels = pickReels(r).map(function (x, i) {
-      return '<article class="reel">' + (i === 0 ? '<p class="reel__today">Сними сегодня</p>' : '') +
-        '<p class="reel__phrase">«' + q2(esc(x.phrase)) + '»</p>' +
-        '<p><b>Что сказать дальше.</b> ' + q2(esc(cap(x.next))) + '</p>' +
-        '<p><b>Чем закончить.</b> «' + q2(esc(x.end)) + '»</p>' +
-        (i === 0 ? '<p class="reel__tip">Сначала наговори этот ролик голосовым себе в «Избранное», как будто рассказываешь подруге. Послушай и начни с самого интересного места</p>' : '') +
+      return '<article class="reel">' +
+        '<div class="reel__screen" style="--p:' + ((i + 1) * 20) + '%">' +
+          '<p class="reel__top"><span>Ролик ' + (i + 1) + '</span>' + (i === 0 ? '<span class="reel__today">Сними сегодня</span>' : '') + '</p>' +
+          '<p class="reel__cap">Начни с фразы</p>' +
+          '<p class="reel__phrase">«' + q2(esc(x.phrase)) + '»</p>' +
+        '</div>' +
+        '<div class="reel__body">' +
+          '<p class="reel__lbl">Дальше расскажи</p><p>' + q2(esc(cap(x.next))) + '</p>' +
+          '<p class="reel__lbl">Закончи так</p><p>«' + q2(esc(x.end)) + '»</p>' +
+          (i === 0 ? '<p class="reel__tip">Сначала наговори этот ролик голосовым себе в «Избранное», как будто рассказываешь подруге. Послушай и начни с самого интересного места</p>' : '') +
+        '</div>' +
         '</article>';
     }).join('');
     var state = STATE_TEXT[S.answers.state];
@@ -465,7 +471,10 @@
             '</div>' +
           '</li>' +
           '<li><span class="path__when">Конец Игры</span><p class="path__what">Ещё один эфир со мной</p><p>Отвечаю на вопросы, которые накопились за Игру</p></li>' +
-          '<li class="path__end"><span class="path__when">День 40</span><p class="path__what">30 роликов в профиле</p><p>По статистике видишь, какие темы набирают просмотры и приводят подписчиков. И знаешь, что снимать дальше</p></li>' +
+          '<li class="path__end"><span class="path__when">День 40</span><p class="path__what">Что у тебя в итоге</p>' +
+            '<div class="result"><p><b>30 роликов в профиле</b>По статистике видишь, какие темы набирают просмотры и приводят подписчиков</p>' +
+            '<p><b>Рекомендации и план, как\u00A0расти дальше</b>Получаешь их на основе всей пройденной Игры</p></div>' +
+          '</li>' +
         '</ol>' +
         '<h3 class="title gap-36" style="font-size:22px">Что было в первом потоке</h3>' +
         '<div class="cases">' +
