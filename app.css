@@ -125,15 +125,21 @@ a { color: inherit; }
 }
 
 /* ── Старт ────────────────────────────────────────────── */
-.start__hi { font-weight: 800; font-size: 16px; }
-.start__types { list-style: none; margin-top: 22px; }
-.start__types li { font-family: var(--f-display); font-weight: 800; font-size: clamp(18px, 5.2vw, 23px); line-height: 1.05; letter-spacing: -.02em; padding: 2px 0; }
-.start__types span { display: inline-block; padding: .08em .18em .04em; margin-left: -.18em; color: var(--on-pink-line); transition: background .2s, color .2s; }
-.start__types li.is-on span { background: var(--cream); color: var(--ink); transform: rotate(-2deg); }
-@media (max-height: 760px) { .start__types { display: none; } }
-.start__body { margin-top: auto; padding-top: 28px; }
-.start__body .display { font-size: clamp(50px, 16vw, 76px); }
+.start__hi { font-weight: 800; font-size: 16px; color: var(--wine); }
+.start__body { margin: auto 0; padding: 36px 0 12px; }
+.start__body .display { font-size: clamp(40px, 14vw, 70px); }
+.start__body .display .label { font-size: .84em; }
+@media (max-height: 720px) {
+  .start__body { padding-top: 20px; }
+  .start__body .display { font-size: clamp(34px, 10.8vw, 48px); }
+  .start__sub { margin-top: 18px; font-size: 17px; }
+  .start__get { margin-top: 14px; }
+  .start__get li { padding: 8px 0; font-size: 16px; }
+}
 .start__body .label { margin-top: 8px; }
+.start__sub { margin-top: 26px; font-size: 19px; line-height: 1.38; font-weight: 800; color: var(--ink); }
+.start__get { list-style: none; margin-top: 22px; border-top: 1.5px solid rgba(31, 31, 31, .25); }
+.start__get li { padding: 11px 0; border-bottom: 1.5px solid rgba(31, 31, 31, .25); font-weight: 700; font-size: 17px; color: var(--ink); }
 .start__foot {
   position: sticky; bottom: 0; z-index: 5;
   margin: 0 calc(-1 * var(--gutter)) calc(-24px - env(safe-area-inset-bottom));
@@ -297,3 +303,5 @@ textarea.input { min-height: 64px; resize: vertical; }
 @media (min-width: 700px) {
   .band { padding: 56px var(--gutter); }
 }
+
+.start__foot .textlink { color: var(--ink); }
