@@ -267,6 +267,23 @@ p, li { text-wrap: pretty; }
 .result p { position: relative; padding: 12px 0 12px 30px; border-top: 1.5px solid rgba(255, 255, 255, .16); font-size: 16px; line-height: 1.45; color: rgba(255, 255, 255, .82); }
 .result p::before { content: '✓'; position: absolute; left: 0; top: 11px; color: var(--pink); font-weight: 800; font-size: 18px; }
 .result b { display: block; margin-bottom: 2px; color: var(--white); font-size: 17px; font-weight: 800; }
+.path__note { margin-top: 12px; padding: 12px 14px; border: 1.5px dashed var(--on-pink-line); border-radius: 12px; font-size: 15px; line-height: 1.45; }
+.path__note b { font-weight: 800; }
+
+/* Уроки: плейлист */
+.lessons { margin-top: 16px; background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 10px 26px -20px rgba(31, 31, 31, .55); }
+.lessons__head { padding: 14px 16px; background: var(--ink); color: var(--white); font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 16px; }
+.lessons ol { list-style: none; padding: 4px 16px 8px; }
+.lessons li { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; border-bottom: 1.5px solid var(--on-cream-line); }
+.lessons li:last-child { border-bottom: 0; }
+.lessons li b { flex: none; width: 30px; height: 30px; border-radius: 8px; background: var(--soft); color: var(--terra-ink); font-family: 'Unbounded', sans-serif; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+.lessons li span { font-size: 16px; font-weight: 700; line-height: 1.4; padding-top: 4px; }
+
+/* Скрины из чата участниц */
+.chats { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.chat { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.chat img { display: block; width: 100%; border-radius: 14px; box-shadow: 0 10px 24px -18px rgba(31, 31, 31, .6); }
+
 .path .path__end { margin-top: 4px; padding: 20px 18px 20px 52px; background: var(--ink); color: var(--white); border-radius: 14px; }
 .path .path__end::before { left: 18px; top: 24px; background: var(--pink); border-color: var(--pink); }
 .path .path__end .path__when { color: var(--pink); }

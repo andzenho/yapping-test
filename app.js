@@ -428,15 +428,15 @@
       '</div></section>' +
 
       '<section class="band"><div class="col">' +
-        (mirror ? '<h2 class="title">Смотри, почему</h2><div class="rows">' + mirror + '</div>' : '') +
-        '<h2 class="title gap-36">За что тебя будут смотреть</h2><p class="lead gap-14">' + esc(t.why) + '</p>' +
+        (mirror ? '<h2 class="title">Смотри, почему!</h2><div class="rows">' + mirror + '</div>' : '') +
+        '<h2 class="title gap-36">За что тебя будут смотреть!</h2><p class="lead gap-14">' + esc(t.why) + '</p>' +
         (state ? '<p class="gap-20">' + esc(state) + '</p>' : '') +
-        '<h2 class="title gap-36">Где твои темы</h2><p class="lead gap-14">' + esc(cap(t.where)) + '</p>' +
+        '<h2 class="title gap-36">Где твои темы!</h2><p class="lead gap-14">' + esc(cap(t.where)) + '</p>' +
         '<p class="gap-14"><b>Как найти свою прямо сейчас.</b> ' + esc(cap(t.find)) + '</p>' +
       '</div></section>' +
 
       '<section class="band band--soft"><div class="col">' +
-        '<h2 class="title">Примеры тем, которые идеально зайдут под твой тип блогера</h2>' +
+        '<h2 class="title">Примеры тем, которые идеально зайдут под твой тип блогера!</h2>' +
         '<ul class="topics">' + topics + '</ul>' +
         '<button class="textlink gap-10" data-act="copy-topics">Скопировать все темы</button>' +
       '</div></section>' +
@@ -447,7 +447,7 @@
       '</div></section>' +
 
       '<section class="band band--ink"><div class="col">' +
-        '<h2 class="title">Чего тебе не снимать</h2><p class="lead gap-14">' + esc(t.dont) + '</p>' +
+        '<h2 class="title">Чего тебе не снимать!</h2><p class="lead gap-14">' + esc(t.dont) + '</p>' +
         (t.karina ? '<div class="quote"><img src="assets/karina-avatar.webp" alt=""><div><p>' + esc(t.karina) + '</p><small>Карина</small></div></div>' : '') +
       '</div></section>' +
 
@@ -457,18 +457,19 @@
         '<p class="lead gap-14">За 40 дней снимешь 30 роликов и найдёшь свои темы, которые набирают десятки тысяч просмотров и приводят подписчиков</p>' +
         '<p class="gap-14">Даже если сейчас не знаешь, о чём снимать, кажешься себе кринжем и боишься, что осудят знакомые</p>' +
         '<p class="small gap-14">Старт ' + esc(CONFIG.gameStart) + '</p>' +
-        '<h3 class="title gap-36" style="font-size:22px">Как проходят 40 дней</h3>' +
+        '<h3 class="title gap-36" style="font-size:22px">Как проходят 40 дней!</h3>' +
         '<p class="gap-10">Обычно курс даёт уроки, а снимать оставляет тебе. Тут наоборот</p>' +
         '<ol class="path">' +
-          '<li><span class="path__when">Неделя 1</span><p class="path__what">Находишь, про что ты блогер</p><p>Вместе с куратором находишь свои темы и форматы и начинаешь понимать, что и как нужно снимать</p></li>' +
+          '<li><span class="path__when">Неделя 1</span><p class="path__what">Находишь, про что ты блогер</p><p>Смотришь мои уроки про тему и метод ЯППИНГ. Вместе с куратором находишь свои темы и форматы и начинаешь понимать, что и как нужно снимать</p></li>' +
           '<li><span class="path__when">Старт Игры</span><p class="path__what">Эфир со мной</p><p>Отвечаю на твои вопросы вживую</p></li>' +
-          '<li class="path__daily"><span class="path__when">Дальше каждый день</span><p class="path__what">Снимаешь по заданию</p>' +
+          '<li class="path__daily"><span class="path__when">Недели 2–6</span><p class="path__what">30 дней снимаешь по заданию</p>' +
             '<div class="loop">' +
               '<div class="loop__step"><b>1</b><p>Получаешь задание, про что снять видео сегодня</p></div>' +
               '<div class="loop__step"><b>2</b><p>Снимаешь и выкладываешь</p></div>' +
               '<div class="loop__step"><b>3</b><p>Куратор даёт обратную связь. Говорит, что работает, а что поправить. Если первая фраза не цепляет, переписывает её за тебя</p></div>' +
-              '<p class="loop__again">↻ И так каждый день. Пропустила, догонишь, задания не сгорают</p>' +
+              '<p class="loop__again">↻ И так каждый день, в воскресенье выходной. Пропустила, догонишь, задания не сгорают</p>' +
             '</div>' +
+            '<p class="path__note"><b>Кто твой куратор.</b> Все мои кураторы действующие блогеры и консультанты по контенту с большим опытом обучения</p>' +
           '</li>' +
           '<li><span class="path__when">Конец Игры</span><p class="path__what">Ещё один эфир со мной</p><p>Отвечаю на вопросы, которые накопились за Игру</p></li>' +
           '<li class="path__end"><span class="path__when">День 40</span><p class="path__what">Что у тебя в итоге</p>' +
@@ -476,7 +477,11 @@
             '<p><b>Рекомендации и план, как\u00A0расти дальше</b>Получаешь их на основе всей пройденной Игры</p></div>' +
           '</li>' +
         '</ol>' +
-        '<h3 class="title gap-36" style="font-size:22px">Что было в первом потоке</h3>' +
+        '<h3 class="title gap-36" style="font-size:22px">Что ты узнаешь на уроках!</h3>' +
+        '<p class="gap-10">Уроки выходят по ходу Игры, каждый ровно тогда, когда он тебе нужен</p>' +
+        '<div class="lessons"><p class="lessons__head">11 уроков</p><ol><li><b>1</b><span>Как найти свою тему для блога</span></li><li><b>2</b><span>Как снимать рилсы по методу ЯППИНГ. Этим методом я снимаю все свои ролики уже 6 лет</span></li><li><b>3</b><span>Как говорить на камеру и не зажиматься</span></li><li><b>4</b><span>Контент-план на 30 роликов и как разогнать одну тему на шесть</span></li><li><b>5</b><span>Какие ролики дают просмотры, а какие подписчиков</span></li><li><b>6</b><span>Что делать, если ролик залетел или просели охваты</span></li><li><b>7</b><span>Где брать идеи, если кажется, что рассказать нечего</span></li><li><b>8</b><span>Как работают алгоритмы</span></li><li><b>9</b><span>Как монтировать ролики</span></li><li><b>10</b><span>Телеграм-канал. Зачем он тебе и как перевести туда людей</span></li><li><b>11</b><span>Деньги с блога. Бартер, реклама, первые продажи</span></li></ol></div>' +
+        '<button class="chat gap-14" data-act="zoom" data-src="assets/cases/chat-lessons.jpg" aria-label="Открыть отзыв"><img src="assets/cases/chat-lessons.jpg" alt="Отзыв участницы: мне очень понравились уроки Карины, чётко по делу, она поделилась своей кухней, стало понятнее, как снимать ролики, на 1000%" loading="lazy"></button>' +
+        '<h3 class="title gap-36" style="font-size:22px">Что было в первом потоке!</h3>' +
         '<div class="cases">' +
           '<article class="case">' +
             '<p class="case__name">Сайхо</p>' +
@@ -495,13 +500,15 @@
             '<p class="case__q">«Ценные уроки, я успела всё, так как без воды и с чётко поставленной задачей»</p>' +
           '</article>' +
         '</div>' +
+        '<h3 class="title gap-36" style="font-size:22px">И ещё из чата участниц!</h3>' +
+        '<div class="chats"><button class="chat" data-act="zoom" data-src="assets/cases/chat-olga.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-olga.jpg" alt="Ольга: блог про тревогу стоял на 2400 подписчиках несколько лет, записала 3 рилса, и они выстрелили" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-velunova-stats.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-velunova-stats.jpg" alt="VELUNOVA: статистика рилсов, 28 798 и 12 374 просмотра" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-anon-stats.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-anon-stats.jpg" alt="Статистика рилса участницы: 35 700 просмотров, 136 подписок" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-viktoria.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-viktoria.jpg" alt="Виктория: ролик залетел, я все ваши советы использовала" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-saikho-47k.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-saikho-47k.jpg" alt="Сайхо: рилс, где я ем и комментирую вкус продукта, набрал 47 тысяч просмотров" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-velunova-blogger.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-velunova-blogger.jpg" alt="VELUNOVA: осознаю, что за этот месяц реально обучусь мыслить как блогер" loading="lazy"></button></div>' +
       '</div></section>' +
 
       '<section class="band band--ink" id="ap"><div class="col">' +
-        '<h2 class="title">Начни с анкеты предзаписи</h2>' +
+        '<h2 class="title">Начни с анкеты предзаписи!</h2>' +
         '<p class="lead gap-14">Это не оплата. Ты просто говоришь мне, что хочешь на новый поток. А я сразу даю то, чего не будет у остальных</p>' +
         '<div class="gift gap-28">' +
-          '<p class="gift__head">Что получишь за анкету</p>' +
+          '<p class="gift__head">Что получишь за анкету!</p>' +
           '<div class="gift__item"><span class="gift__tag">Сразу</span><p class="gift__title">Запись разбора рилсов</p><p>Эфир, где я разбираю рилсы участниц Большой Игры</p></div>' +
           '<div class="gift__item"><span class="gift__tag">Только для своих</span><p class="gift__title">Закрытый канал предзаписи</p><p>Эфиры, которых нет в открытом доступе. Про Большую Игру 2.0 узнаёшь раньше всех</p></div>' +
           '<div class="gift__item"><span class="gift__tag">Только по анкете</span><p class="gift__title">Самая низкая цена</p><p>Дальше цена на поток будет расти</p></div>' +
