@@ -315,6 +315,7 @@
   function render() {
     var html = ({ start: vStart, q: vQuestion, calc: vCalc, result: vResult, form: vForm, done: vDone })[screen]();
     app.innerHTML = html;
+    typograf(app);
     document.body.style.background = screen === 'form' ? 'var(--cream)' : 'var(--pink)';
     if (screen === 'result') afterResult();
     if (screen === 'start' || screen === 'done') fitLabel(app.querySelector('.display'));
@@ -356,6 +357,21 @@
       '</div></section>';
   }
 
+  // Неразрывные пробелы: короткие слова и цифры не висят в конце строки
+  var SHORT = /(^|[\s«„(\u00A0])((?:[а-яёА-ЯЁ]{1,2}|для|без|под|над|при|про|или|что|\d+))[ \t\n]+(?=\S)/g;
+  function nbsp(t) {
+    var prev;
+    do { prev = t; t = t.replace(SHORT, '$1$2\u00A0'); } while (t !== prev);
+    return t.replace(/\s(бы|ли|же)(?=[\s.,!?»]|$)/g, '\u00A0$1');
+  }
+  function typograf(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+    while ((n = w.nextNode())) {
+      var p = n.parentNode && n.parentNode.nodeName;
+      if (p === 'SCRIPT' || p === 'STYLE' || p === 'TEXTAREA' || (n.parentNode.closest && n.parentNode.closest('.display'))) continue;
+      var v = nbsp(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v;
+    }
+  }
   function reactionFor(q) { return q.afterBy ? q.afterBy[S.answers[q.id]] : q.after; }
 
   function vCalc() {
@@ -424,7 +440,6 @@
         '<h2 class="title">Чего тебе не снимать</h2><p class="lead gap-14">' + esc(t.dont) + '</p>' +
         (t.karina ? '<div class="quote"><img src="assets/karina-avatar.webp" alt=""><div><p>' + esc(t.karina) + '</p><small>Карина</small></div></div>' : '') +
         (lim ? '<ul class="limits">' + lim + '</ul>' : '') +
-        '<button class="btn btn--line gap-36" data-act="share">Поделиться в сторис</button>' +
       '</div></section>' +
 
       '<section class="band" id="offer"><div class="col">' +
@@ -440,7 +455,7 @@
         '<p class="small soft gap-10">2 минуты. Потом сразу откроется канал</p>' +
         (inTG ? '' : '<button class="textlink gap-20" data-act="restart">Пройти тест заново</button>') +
       '</div></section>' +
-      '<div class="sticky-cta" id="stickyCta"><button class="btn" data-act="form">Анкета на Большую Игру</button></div>';
+      '<div class="sticky-cta" id="stickyCta"><button class="btn" data-act="form">Заполнить анкету</button></div>';
   }
 
   function fitLabel(h) {
@@ -533,7 +548,6 @@
       var text = 'Я ' + t.name + '. Мои темы для роликов:\n' + pickTopics(r).map(function (x, i) { return (i + 1) + '. ' + x; }).join('\n');
       copy(text).then(function (ok) { toast(ok === false ? 'Не получилось скопировать' : 'Скопировано ✓'); });
     }
-    else if (act === 'share') share();
     else if (act === 'form') { prefillForm(); S.step = 0; save(); go('form'); }
     else if (act === 'chip') chip(el);
     else if (act === 'tg-phone') tgPhone();
@@ -649,79 +663,6 @@
     var btn = app.querySelector('[data-act="form-next"]'); if (btn) { btn.disabled = true; btn.textContent = 'Отправляю…'; }
     send('lead').then(function () { S.sent.lead = true; save(); haptic('ok'); go('done'); });
   }
-
-  /* ── Карточка для сторис ─────────────────────────────── */
-  function share() {
-    var t = TYPES[S.result.main];
-    toast('Рисую карточку…');
-    makeCard(t).then(function (canvas) {
-      canvas.toBlob(function (blob) {
-        var file = new File([blob], 'kakoy-ty-blogger.png', { type: 'image/png' });
-        var text = 'Я ' + t.name + '. А ты какой блогер? Тест Карины: ' + location.origin + location.pathname;
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          navigator.share({ files: [file], text: text }).catch(function () {});
-          return;
-        }
-        var url = canvas.toDataURL('image/png');
-        var sheet = document.createElement('div');
-        sheet.className = 'sheet';
-        sheet.innerHTML = '<img src="' + url + '" alt="Карточка результата"><p>Нажми на картинку и удерживай, чтобы сохранить. Потом выложи в сторис</p>' +
-          '<a class="btn" href="' + url + '" download="kakoy-ty-blogger.png">Скачать картинку</a>' +
-          '<button class="btn btn--line" data-close style="color:#F6EEE2">Закрыть</button>';
-        sheet.addEventListener('click', function (e) { if (e.target === sheet || e.target.hasAttribute('data-close')) sheet.remove(); });
-        document.body.appendChild(sheet);
-      }, 'image/png');
-    }).catch(function () { toast('Не получилось нарисовать карточку'); });
-  }
-
-  function makeCard(t) {
-    var fonts = ['900 120px Unbounded', '800 52px Unbounded', '700 40px Manrope', '800 30px Manrope'];
-    return Promise.all(fonts.map(function (f) { return document.fonts ? document.fonts.load(f) : null; }))
-      .then(function () {
-        var c = document.createElement('canvas'); c.width = 1080; c.height = 1920;
-        var x = c.getContext('2d');
-        x.fillStyle = '#E3768B'; x.fillRect(0, 0, 1080, 1920);
-        x.textAlign = 'center'; x.textBaseline = 'alphabetic';
-        x.fillStyle = '#1F1F1F'; x.font = '800 40px Manrope';
-        x.fillText('Тест Карины · kerry.catt', 540, 210);
-        var y = 690;
-        x.fillStyle = '#1F1F1F'; x.font = '900 120px Unbounded'; x.fillText('Я', 540, y);
-        var lines = wrap(x, t.name.toUpperCase() + '!', 940, '900 {s}px Unbounded', 150, 84);
-        y += 40;
-        x.font = '900 ' + lines.size + 'px Unbounded';
-        lines.forEach(function (l) {
-          y += lines.size * 1.08;
-          var w = x.measureText(l).width + lines.size * 0.36, h = lines.size * 1.0;
-          x.save(); x.translate(540, y - lines.size * 0.36); x.rotate(-0.035);
-          x.fillStyle = '#F6EEE2'; x.fillRect(-w / 2, -h / 2, w, h);
-          x.fillStyle = '#1F1F1F'; x.fillText(l, 0, lines.size * 0.36);
-          x.restore();
-        });
-        x.fillStyle = '#F6EEE2';
-        x.fillStyle = '#1F1F1F';
-        var tag = wrap(x, t.tagline, 880, '800 {s}px Manrope', 54, 44);
-        x.font = '800 ' + tag.size + 'px Manrope';
-        y += 110; tag.forEach(function (l) { x.fillText(l, 540, y); y += tag.size * 1.3; });
-        x.fillStyle = '#1F1F1F'; roundRect(x, 90, 1600, 900, 170, 40); x.fill();
-        x.fillStyle = '#F6EEE2'; x.font = '800 50px Unbounded'; x.fillText('А ТЫ КАКОЙ БЛОГЕР?', 540, 1680);
-        x.font = '800 32px Manrope'; x.fillStyle = 'rgba(246,238,226,.8)'; x.fillText('Пройди тест Карины', 540, 1730);
-        return c;
-      });
-  }
-  function wrap(x, text, maxW, fontTpl, maxSize, minSize) {
-    var size = maxSize, words = String(text).split(' '), lines, used = maxSize;
-    for (; size >= minSize; size -= 6) {
-      used = size;
-      x.font = fontTpl.replace('{s}', size);
-      lines = []; var cur = '';
-      words.forEach(function (w) { var test = cur ? cur + ' ' + w : w; if (x.measureText(test).width > maxW && cur) { lines.push(cur); cur = w; } else cur = test; });
-      if (cur) lines.push(cur);
-      var widest = Math.max.apply(null, lines.map(function (l) { return x.measureText(l).width; }));
-      if (widest <= maxW && lines.length <= 2) break;
-    }
-    lines.size = used; return lines;
-  }
-  function roundRect(x, l, t, w, h, r) { x.beginPath(); x.moveTo(l + r, t); x.arcTo(l + w, t, l + w, t + h, r); x.arcTo(l + w, t + h, l, t + h, r); x.arcTo(l, t + h, l, t, r); x.arcTo(l, t, l + w, t, r); x.closePath(); }
 
   /* ── Старт ───────────────────────────────────────────── */
   flush();
