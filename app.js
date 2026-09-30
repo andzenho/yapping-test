@@ -302,6 +302,14 @@
     app.innerHTML = html;
     document.body.style.background = screen === 'form' ? 'var(--cream)' : 'var(--pink)';
     if (screen === 'result') afterResult();
+    clearInterval(render.spin);
+    if (screen === 'start') {
+      var items = app.querySelectorAll('#startTypes li'), k = 0;
+      var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (items.length && !still) render.spin = setInterval(function () {
+        items[k].classList.remove('is-on'); k = (k + 1) % items.length; items[k].classList.add('is-on');
+      }, 650);
+    }
     if (inTG && W.setBackgroundColor) { try { W.setBackgroundColor(screen === 'form' ? '#F6EEE2' : '#E3768B'); W.setHeaderColor(screen === 'form' ? '#F6EEE2' : '#E3768B'); } catch (e) {} }
   }
 
@@ -309,9 +317,10 @@
     var name = firstName();
     return '<section class="screen"><div class="col">' +
       '<p class="start__hi">Привет' + (name ? ', ' + esc(name) : '') + '! Это Карина</p>' +
+      '<ul class="start__types" id="startTypes" aria-hidden="true">' + ORDER.map(function (id, i) { return '<li' + (i === 0 ? ' class="is-on"' : '') + '><span>' + esc(TYPES[id].name) + '</span></li>'; }).join('') + '</ul>' +
       '<div class="start__body"><h1 class="display">Какой ты<br><span class="label label--slap">блогер?</span></h1>' +
       '<p class="lead gap-28">и на какие темы тебе снимать будет идеально для набора просмотров и подписчиков через яппинг</p>' +
-      '<p class="soft gap-20">10 вопросов, 3 минуты. Просто нажимай на кнопки, писать ничего не надо. В конце покажу, какой ты блогер, дам темы и готовые ролики</p></div>' +
+      '<p class="soft gap-20">10 вопросов, 3 минуты. Только кнопки, писать ничего не надо</p></div>' +
       '<div class="start__foot"><button class="btn" data-act="begin">Погнали!</button>' +
       (S.result ? '<button class="textlink" data-act="show-result">Мой прошлый результат</button>' : '') +
       '</div></div></section>';
