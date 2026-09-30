@@ -26,8 +26,12 @@ for body in blocks:
     topics_block = body.split("**Примеры тем, которые идеально зайдут под твой тип блогера**", 1)[1].split("**5 готовых роликов**")[0]
     topics = [l[2:].strip() for l in topics_block.splitlines() if l.startswith("- ")]
     reels_block = body.split("**5 готовых роликов**", 1)[1].split("**Чего тебе не снимать:**")[0]
-    reels = [{"phrase": m.group(1), "next": m.group(2).strip(), "end": m.group(3)}
-             for m in re.finditer(r"\d\. «(.+?)»\n\s+Что сказать дальше: (.+?)\n\s+Чем закончить: «(.+?)»", reels_block)]
+    reels = []
+    for m in re.finditer(r"\d\. «(.+?)»\n\s+Что сказать дальше: (.+?)\n\s+Чем закончить: «(.+?)»(?:\n\s+Например: «(.+?)»)?", reels_block):
+        r = {"phrase": m.group(1), "next": m.group(2).strip(), "end": m.group(3)}
+        if m.group(4):
+            r["ex"] = m.group(4)
+        reels.append(r)
     t = {
         "id": IDS[name], "name": name,
         "tagline": field(body, "Коротко"),
