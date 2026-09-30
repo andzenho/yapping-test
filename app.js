@@ -540,7 +540,7 @@
           '<div class="gift__item"><span class="gift__tag">Только по анкете</span><p class="gift__title">Самая низкая цена</p><p>Дальше цена на поток будет расти</p></div>' +
           '<div class="gift__item"><span class="gift__tag">Раньше всех</span><p class="gift__title">Место в группе с куратором</p><p>Мест столько, сколько роликов успевают разобрать мои кураторы. О старте продаж узнаешь первой</p></div>' +
         '</div>' +
-        '<button class="btn gap-28" data-act="form">Оставить заявку</button>' +
+        '<button class="btn gap-28" data-act="form">Записаться в предзапись</button>' +
         '<p class="small gap-10" style="opacity:.8">2 минуты. Бесплатно. Потом сразу откроется канал</p>' +
         '<h3 class="title gap-36" style="font-size:22px">Частые вопросы</h3>' +
         '<div class="faq">' +
@@ -555,10 +555,10 @@
           '<p><b>Мне нужны клиенты, а не просмотры.</b> Заявки с первых роликов не обещаю. Клиенты приходят к той, кого видят каждый день и кому верят. Маша психолог, за Игру выложила 43 ролика, подписчиков стало 2 166 вместо 747. А про первые продажи с блога есть отдельный урок</p>' +
           '<p><b>Я живу не в России.</b> Оплата картой любой страны</p>' +
         '</div>' +
-        '<button class="btn gap-28" data-act="form">Оставить заявку</button>' +
+        '<button class="btn gap-28" data-act="form">Записаться в предзапись</button>' +
         (inTG ? '' : '<button class="textlink gap-20" data-act="restart" style="color:var(--white)">Пройти тест заново</button>') +
       '</div></section>' +
-      '<div class="sticky-cta" id="stickyCta"><button class="btn" data-act="to-ap">Забрать запись разбора</button></div>';
+      '<div class="sticky-cta" id="stickyCta"><button class="btn" data-act="form">Записаться в предзапись</button></div>';
   }
 
   function fitLabel(h) {
@@ -649,7 +649,6 @@
     else if (act === 'restart') { var keep = S.form; S = fresh(); S.form = keep; save(); go('start'); }
     else if (act === 'pick') pick(el.getAttribute('data-v'));
     else if (act === 'next') finishQuiz();
-    else if (act === 'to-ap') { var ap = document.getElementById('ap'); if (ap) ap.scrollIntoView({ behavior: 'smooth' }); }
     else if (act === 'zoom') {
       var box = document.createElement('div');
       box.className = 'zoom';
