@@ -9,7 +9,7 @@
     // URL веб-приложения Google Apps Script (backend/Code.js). Пусто — ответы копятся в браузере.
     endpoint: 'https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec',
     // Ссылка-приглашение в закрытый канал предзаписи (АП), открывается после анкеты.
-    channelUrl: 'https://t.me/+ECw7UVPWM1E1Yzli',
+    channelUrl: 'https://t.me/+7Ztd-hWfnkJlMTk6',
     teamUrl: 'https://t.me/kerryhelper',
     gameStart: '16 ноября'
   };
