@@ -326,7 +326,7 @@
     return '<section class="screen start"><div class="col">' +
       '<p class="start__hi">Привет' + (name ? ', ' + esc(name) : '') + '! Это Карина</p>' +
       '<div class="start__body">' +
-        '<h1 class="display">Не знаешь, про что снимать?</h1>' +
+        '<h1 class="display"><span class="start__pre">Хочешь быть блогером,</span>но не знаешь, про что снимать?</h1>' +
         '<p class="start__sub">За 3 минуты скажу, какой ты блогер и на какие темы тебе снимать, чтобы набирать просмотры и подписчиков</p>' +
         '<ul class="start__get"><li>Твой тип блогера</li><li>15 тем под тебя</li><li>5 готовых роликов</li></ul>' +
       '</div>' +
