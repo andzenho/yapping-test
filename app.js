@@ -22,9 +22,20 @@
 
   /* ── Вопросы ─────────────────────────────────────────── */
   var QUESTIONS = [
-    { id: 'state', text: 'Что у тебя с блогом прямо сейчас?', after: 'Поняла. Теперь самое интересное', opts: [
+    { id: 'state', text: 'Что у тебя с блогом прямо сейчас?', afterBy: {
+        NOL: 'Нормально. Я свою тему тоже не выбирала',
+        MNOGO: 'У меня тоже всё в кучу. Разберёмся',
+        STRAH: 'Я первые 2 года снимала в маске. Так что понимаю',
+        BROSAYU: 'Знакомо. Сейчас разберёмся, почему так',
+        NENUZHNO: 'Мне тоже казалось, что во мне ничего нет',
+        PLATO: 'Поняла. Скорее всего, дело не в тебе',
+        SKUCHNO: 'Скучных тем нет. Есть скучно рассказанные',
+        RASTU: 'Отлично. Тогда ищем, куда расти'
+      }, opts: [
       ['Не знаю, про что снимать', 'NOL'],
       ['Тем много, не могу выбрать одну', 'MNOGO'],
+      ['Стесняюсь камеры и боюсь, что осудят', 'STRAH'],
+      ['Начинаю и бросаю', 'BROSAYU'],
       ['Есть что сказать, но кажется, это никому не надо', 'NENUZHNO'],
       ['Снимаю, но никто не смотрит', 'PLATO'],
       ['Хочу рассказывать про своё дело, но боюсь, что будет скучно', 'SKUCHNO'],
@@ -45,10 +56,10 @@
       ['Как человек всё поменял, было и стало', 'M'], ['Как устроена чужая работа или жизнь', 'G'], ['Где специалист разбирает свою тему', 'E'],
       ['Лайфхаки и советы, которые можно сразу применить', 'C']
     ] },
-    { id: 'shop', caption: 'Если нахамили в магазине', text: 'В магазине тебе нахамили. Что ты сделаешь?', after: 'Ага, уже кое-что вижу 👀', opts: [
-      ['Скажу прямо, там же', 'P'], ['Потом всем расскажу, как это было', 'R'], ['Вечером расскажу близким', 'D'],
-      ['Узнаю, куда жаловаться, и расскажу подругам, что делать', 'C'], ['Больше туда не пойду, найду новое место', 'M'],
-      ['Спокойно объясню, как должно быть по правилам', 'E'], ['Мне станет интересно, почему у них всё так устроено', 'G']
+    { id: 'comment', caption: 'Больше всего порадует комментарий', text: 'Какой комментарий под твоим роликом порадует тебя больше всего?', quote: true, after: 'Ага, уже кое-что вижу 👀', opts: [
+      ['Не могла оторваться, чем всё кончилось?', 'R'], ['Наконец-то кто-то сказал это вслух', 'P'], ['Как будто про меня', 'D'],
+      ['Ты меня вдохновила, я тоже начну', 'M'], ['Никогда не думала, что там всё так устроено', 'G'],
+      ['Вы профи, как к вам попасть?', 'E'], ['Сохранила, очень пригодится', 'C']
     ] },
     { id: 'post', caption: 'Пост, который ты бы написала', text: 'Какой пост ты бы точно написала, если бы не стеснялась?', opts: [
       ['Историю, которую я всем рассказываю', 'R'], ['Всё, что я думаю про одну вещь', 'P'], ['Как на самом деле выглядит мой день', 'D'],
@@ -76,7 +87,7 @@
     ] }
   ];
   var TYPE_QS = QUESTIONS.filter(function (q) { return q.caption; });
-  var MIRROR_ORDER = ['easy', 'people', 'stories', 'known', 'post', 'film', 'watch', 'shop'];
+  var MIRROR_ORDER = ['easy', 'people', 'comment', 'stories', 'known', 'post', 'film', 'watch'];
 
   var STATE_TEXT = {
     NOL: 'Тема у тебя есть. Ты просто не знала, где её искать. Теперь знаешь',
@@ -84,9 +95,11 @@
     NENUZHNO: 'Надо это или нет, покажут просмотры, а не твои мысли. Сними пять роликов ниже и посмотри',
     PLATO: 'Чаще всего ролик не смотрят из-за первой фразы. Поэтому у каждого ролика ниже первая фраза уже готова',
     SKUCHNO: 'Скучно бывает не от темы, а от того, как рассказываешь. Твоё дело может звучать живо, ниже покажу как',
-    RASTU: 'Раз всё идёт, дальше растут те, кто снимает каждый день и не повторяется. Ниже темы под твой тип, чтобы не выдохнуться'
+    RASTU: 'Раз всё идёт, дальше растут те, кто снимает каждый день и не повторяется. Ниже темы под твой тип, чтобы не выдохнуться',
+    STRAH: 'Не бойся. Всегда будут осуждать. Ты в принципе можешь ничего не делать, они будут недовольны, что ты просто здесь стоишь',
+    BROSAYU: 'Бросают, когда каждый раз придумывают, что снять, с нуля. Когда темы есть заранее, снимать проще. Ниже они уже есть. А дальше это дисциплина. Как в тренажёрный зал'
   };
-  var STATE_STOP = { NOL: 'нет идей, о чём снимать', MNOGO: 'тем много, не могу выбрать одну', NENUZHNO: 'мой контент никому не нужен' };
+  var STATE_STOP = { NOL: ['нет идей, о чём снимать'], MNOGO: ['тем много, не могу выбрать одну'], NENUZHNO: ['мой контент никому не нужен'], STRAH: ['кажется, что я кринж', 'боюсь, что осудят знакомые'], BROSAYU: ['руки не доходят'] };
 
   var LIMIT_TEXT = {
     kids: 'Детей в кадре не будет. Во всех роликах в кадре только ты',
@@ -335,13 +348,15 @@
     return '<section class="screen"><div class="col">' +
       '<div class="topbar">' + (inTG ? '<span></span>' : '<button class="back" data-act="back">Назад</button>') + '<span class="count">' + n + ' из ' + total + '</span></div>' +
       '<div class="progress"><i style="width:' + Math.round((n - 1) / total * 100) + '%"></i></div>' +
-      (prev && prev.after && S.idx === S.lastReactionIdx ? '<div class="reaction"><img src="assets/karina-avatar.webp" alt="">' + esc(prev.after) + '</div>' : '') +
+      (prev && S.idx === S.lastReactionIdx && reactionFor(prev) ? '<div class="reaction"><img src="assets/karina-avatar.webp" alt="">' + esc(reactionFor(prev)) + '</div>' : '') +
       '<h2 class="title q__text">' + esc(q.text) + '</h2>' +
       (q.hint ? '<p class="small soft q__hint">' + esc(q.hint) + '</p>' : '') +
       '<div class="opts">' + opts + '</div>' +
       (q.multi ? '<div class="q__foot"><button class="btn" data-act="next"' + ((cur || []).length ? '' : ' disabled') + '>Мой результат</button></div>' : '') +
       '</div></section>';
   }
+
+  function reactionFor(q) { return q.afterBy ? q.afterBy[S.answers[q.id]] : q.after; }
 
   function vCalc() {
     return '<section class="screen calc"><div class="col">' +
@@ -550,7 +565,7 @@
     S.answers[q.id] = v; save(); markOpts(function (val) { return val === v; });
     setTimeout(function () {
       pick.busy = false;
-      if (q.after) S.lastReactionIdx = S.idx + 1;
+      if (q.after || q.afterBy) S.lastReactionIdx = S.idx + 1;
       S.idx++; save();
       if (S.idx >= QUESTIONS.length) finishQuiz(); else go('q');
     }, 260);
@@ -579,7 +594,7 @@
   function prefillForm() {
     if (!S.form.name && user && user.first_name) S.form.name = user.first_name;
     if (!S.form.tgNick && user && user.username) S.form.tgNick = '@' + user.username;
-    if (!S.form.stops) { var s = STATE_STOP[S.answers.state]; S.form.stops = s ? [s] : []; }
+    if (!S.form.stops) { S.form.stops = (STATE_STOP[S.answers.state] || []).slice(); }
   }
 
   function chip(el) {
