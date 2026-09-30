@@ -8,8 +8,8 @@
   var CONFIG = {
     // URL веб-приложения Google Apps Script (backend/Code.js). Пусто — ответы копятся в браузере.
     endpoint: 'https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec',
-    // ЗАГЛУШКА: ссылка-приглашение в закрытый канал предзаписи (АП). Пока пусто, кнопка показывает подсказку.
-    channelUrl: '',
+    // Ссылка-приглашение в закрытый канал предзаписи (АП), открывается после анкеты.
+    channelUrl: 'https://t.me/+ECw7UVPWM1E1Yzli',
     teamUrl: 'https://t.me/kerryhelper',
     gameStart: '16 ноября'
   };
