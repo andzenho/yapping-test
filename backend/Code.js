@@ -26,7 +26,8 @@ const HEAD_LEADS = [
   'Что останавливает', 'Курсы', 'Была с нами',
   'Когда готова', 'Вкладываться', 'Формат', 'Результат через 40 дней',
   'Тип блогера', 'Второй тип', 'Состояние',
-  'TG id', 'TG ник', 'Проверено TG'
+  'TG id', 'TG ник', 'Проверено TG',
+  'Консультация'
 ];
 
 function setup() {
@@ -76,11 +77,13 @@ function doPost(e) {
         (a.stops || []).join(', '), a.courses, a.withUs,
         a.when, a.invest, a.format, a.result,
         t.type, t.second, t.state,
-        tg.id, tg.username ? '@' + tg.username : '', verified
+        tg.id, tg.username ? '@' + tg.username : '', verified,
+        a.consult
       ]));
       const row = sh.getLastRow();
       if (seg === 'горячая') sh.getRange(row, 1, 1, HEAD_LEADS.length).setBackground('#FBD9D3');
       if (grad) sh.getRange(row, 3).setBackground('#F6EEE2');
+      if (a.consult === 'да, хочу') sh.getRange(row, HEAD_LEADS.length).setFontWeight('bold').setBackground('#FBE8EC');
       notify_(seg, grad, a, t);
       return json_({ ok: true, segment: seg });
     }
@@ -93,22 +96,31 @@ function doPost(e) {
   }
 }
 
-/** Базовая сегментация до таблицы сегментов от Ильи. */
+/**
+ * Сегменты по логике Пырикова (горячая, средняя, холодная).
+ * Горячая: начать сейчас или в ближайший месяц, вкладываться «да» и хочет консультацию.
+ * Холодная: «позже» или «ищу бесплатное». Остальные средние.
+ * Была на Разминке: на ступень выше (кто выложил ролик на Разминке, покупал Игру вдвое чаще).
+ */
 function segment_(a) {
-  const now = a.when === 'прямо сейчас';
-  const soon = now || a.when === 'в ближайший месяц';
-  if (now && a.invest === 'да') return 'горячая';
-  if (soon && (a.invest === 'да' || a.invest === 'зависит от цены')) return 'тёплая';
-  return 'холодная';
+  const soon = a.when === 'прямо сейчас' || a.when === 'в ближайший месяц';
+  const LEVELS = ['холодная', 'средняя', 'горячая'];
+  let lvl;
+  if (a.when === 'позже, пока присматриваюсь' || a.invest === 'нет, ищу бесплатное') lvl = 0;
+  else if (soon && a.invest === 'да' && a.consult === 'да, хочу') lvl = 2;
+  else lvl = 1;
+  if (a.withUs === 'на Разминке' && lvl < 2) lvl += 1;
+  return LEVELS[lvl];
 }
 
 function notify_(seg, grad, a, t) {
   const props = PropertiesService.getScriptProperties();
   const token = props.getProperty('BOT_TOKEN');
   const chat = props.getProperty('MANAGER_CHAT_ID');
-  if (!token || !chat || (seg !== 'горячая' && !grad)) return;
+  const wantsCall = a.consult === 'да, хочу';
+  if (!token || !chat || (seg !== 'горячая' && !grad && !wantsCall)) return;
   const lines = [
-    grad ? '🎓 Выпускница Большой Игры' : '🔥 Горячая анкета',
+    grad ? '🎓 Выпускница Большой Игры' : (seg === 'горячая' ? '🔥 Горячая анкета' : '📞 Хочет консультацию'),
     `${a.name || ''}, ${a.age || ''}`,
     `Телеграм: ${a.tgNick || '—'}`,
     `Телефон: ${a.phone || '—'}`,
@@ -149,6 +161,9 @@ function verifyTg_(initData) {
 function sheet_(ss, name, head) {
   let sh = ss.getSheetByName(name);
   if (!sh) sh = ss.insertSheet(name);
+  if (sh.getLastRow() > 0 && sh.getLastColumn() < head.length) {
+    sh.getRange(1, 1, 1, head.length).setValues([head]).setFontWeight('bold').setBackground('#1F1F1F').setFontColor('#F6EEE2');
+  }
   if (sh.getLastRow() === 0) {
     sh.appendRow(head);
     sh.getRange(1, 1, 1, head.length).setFontWeight('bold').setBackground('#1F1F1F').setFontColor('#F6EEE2');
