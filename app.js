@@ -477,8 +477,7 @@
       '</div></section>' +
 
       '<section class="band band--soft" id="offer"><div class="col">' +
-        '<p class="eyebrow">На что эта предзапись</p><p class="lead gap-10">Темы для старта у тебя есть. Какие из них твои, покажут только ролики. Уникальность ты найдёшь только тогда, когда много снимешь и посмотришь, что ты сделал. Поэтому зову тебя в Большую Игру</p>' +
-        '<h2 class="display gap-36" style="font-size:clamp(34px,10vw,48px)">Большая Игра <span class="label">2.0!</span></h2>' +
+        '<h2 class="display" style="font-size:clamp(34px,10vw,48px)">Большая Игра <span class="label">2.0!</span></h2>' +
         '<p class="lead gap-14">За 40 дней снимешь 30 роликов и найдёшь свои темы, которые набирают десятки тысяч просмотров и приводят подписчиков</p>' +
         '<ul class="facts gap-14"><li class="facts__date">Старт ' + esc(CONFIG.gameStart) + '</li></ul>' +
         '<p class="gap-14">Даже если сейчас не знаешь, о чём снимать, кажешься себе кринжем и боишься, что осудят знакомые. Или уже снимаешь, а просмотры стоят на месте</p>' +
