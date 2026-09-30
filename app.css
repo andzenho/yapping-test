@@ -272,6 +272,9 @@ p, li { text-wrap: pretty; }
 .eyebrow { font-size: 14px; font-weight: 800; color: var(--terra-ink); }
 .form__lead { font-size: 15px; font-weight: 700; line-height: 1.4; }
 /* Видео-магнит */
+.ap-mini { list-style: none; margin-top: 10px; }
+.ap-mini li { position: relative; padding: 4px 0 4px 28px; font-weight: 700; }
+.ap-mini li::before { content: '✓'; position: absolute; left: 2px; top: 3px; color: var(--pink-ink); font-weight: 800; }
 .magnet { background: var(--white); }
 .vcard { position: relative; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; width: 100%; aspect-ratio: 16 / 10; max-height: 250px; padding: 18px 20px; border-radius: 18px; text-align: left; color: var(--white); cursor: pointer;
   background: var(--ink); box-shadow: 0 18px 36px -22px rgba(31, 31, 31, .8); }
@@ -328,7 +331,8 @@ p, li { text-wrap: pretty; }
 .qcard__who { font-weight: 800; }
 .qcard__who small { display: block; margin-top: 2px; font-size: 13px; font-weight: 700; color: var(--on-pink-soft); }
 .qcard__num { margin-top: 10px; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 26px; line-height: 1; color: var(--pink-ink); }
-.qcard__q { margin-top: 10px; font-size: 16px; line-height: 1.45; }
+.qcard__lbl { margin-top: 6px; font-size: 14px; font-weight: 700; }
+.qcard__q { margin-top: 10px; font-size: 16px; line-height: 1.45; font-style: italic; }
 .qcard .chat { margin-top: 12px; }
 .chats { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
 .chat { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
