@@ -8,7 +8,7 @@
   var CONFIG = {
     // URL веб-приложения Google Apps Script (backend/Code.js). Пусто — ответы копятся в браузере.
     endpoint: 'https://script.google.com/macros/s/AKfycbyHbXYMZMWX1belQqULpMz84rfmhP2LXmcIMzroqhr4PKjvNOxIR4lump3OfY04ZC4x/exec',
-    // Ссылка-приглашение в закрытый канал предзаписи. Пусто — после анкеты ведём к команде.
+    // ЗАГЛУШКА: ссылка-приглашение в закрытый канал предзаписи (АП). Пока пусто, кнопка показывает подсказку.
     channelUrl: '',
     teamUrl: 'https://t.me/kerryhelper',
     gameStart: '16 ноября'
@@ -445,17 +445,46 @@
       '<section class="band band--pink" id="offer"><div class="col">' +
         '<p class="lead">Темы у тебя есть. Дальше всё решает одно. Снимаешь ты каждый день или нет. И есть ли рядом тот, кто подскажет, что поправить</p>' +
         '<h2 class="display gap-36" style="font-size:clamp(34px,10vw,48px)">Большая Игра <span class="label">2.0!</span></h2>' +
-        '<p class="lead gap-14">Старт ' + esc(CONFIG.gameStart) + '. Заполни анкету на новый поток</p>' +
+        '<p class="lead gap-14">За 40 дней станешь блогером, у которого ролики набирают десятки тысяч просмотров, а подписчики ждут новые</p>' +
+        '<p class="small gap-10">Старт ' + esc(CONFIG.gameStart) + '</p>' +
+        '<h3 class="title gap-36" style="font-size:22px">Как это устроено</h3>' +
         '<ul class="offer__list">' +
-          '<li>Сразу получишь запись эфира, где Карина разбирает рилсы участниц Большой Игры</li>' +
-          '<li>Попадёшь в закрытый канал. Там эфиры только для тех, кто заполнил анкету, и всё про Большую Игру 2.0</li>' +
-          '<li>Займёшь самые лучшие места раньше всех и зайдёшь по самой низкой цене. Дальше будет дороже</li>' +
+          '<li>Первую неделю вместе с куратором находишь, про что ты блогер</li>' +
+          '<li>Дальше каждое утро берёшь готовое задание под свою тему и снимаешь</li>' +
+          '<li>Куратор разбирает каждый ролик. Если первая фраза не цепляет, переписывает её за тебя</li>' +
+          '<li>Через 40 дней у тебя 30 роликов в профиле, и по статистике ты знаешь, что снимать дальше</li>' +
         '</ul>' +
-        '<button class="btn gap-28" data-act="form">Заполнить анкету</button>' +
-        '<p class="small soft gap-10">2 минуты. Потом сразу откроется канал</p>' +
-        (inTG ? '' : '<button class="textlink gap-20" data-act="restart">Пройти тест заново</button>') +
+        '<h3 class="title gap-36" style="font-size:22px">Как это было в первом потоке</h3>' +
+        '<ul class="offer__list">' +
+          '<li>Сайхо ни разу в жизни не снимала рилс. Первый сняла на второй день Игры, потом её ролики набрали 47 и 15 тысяч просмотров</li>' +
+          '<li>Маша выложила за Игру 43 ролика. Лучший набрал больше 100 тысяч просмотров, подписчиков стало 2 140 вместо 747</li>' +
+        '</ul>' +
       '</div></section>' +
-      '<div class="sticky-cta" id="stickyCta"><button class="btn" data-act="form">Заполнить анкету</button></div>';
+
+      '<section class="band band--ink" id="ap"><div class="col">' +
+        '<h2 class="title">Начни с анкеты предзаписи</h2>' +
+        '<p class="lead gap-14">Это не оплата. Ты просто говоришь, что хочешь на новый поток, и сразу получаешь то, чего не будет у остальных</p>' +
+        '<ul class="offer__list offer__list--ink">' +
+          '<li>Запись эфира, где Карина разбирает рилсы участниц Большой Игры. Откроется сразу после анкеты</li>' +
+          '<li>Закрытый канал предзаписи. Эфиры только для своих и всё про Большую Игру 2.0 раньше всех</li>' +
+          '<li>Самая низкая цена на поток. По анкете дешевле всего, дальше будет дороже</li>' +
+          '<li>Места в команде раньше всех. Их столько, сколько успевают разобрать кураторы</li>' +
+        '</ul>' +
+        '<button class="btn gap-28" data-act="form">Оставить заявку</button>' +
+        '<p class="small gap-10" style="opacity:.8">2 минуты. Бесплатно. Потом сразу откроется канал</p>' +
+        '<h3 class="title gap-36" style="font-size:22px">Частые вопросы</h3>' +
+        '<div class="faq">' +
+          '<p><b>Это оплата?</b> Нет. Анкета бесплатная и ни к чему не обязывает</p>' +
+          '<p><b>Мне будут названивать?</b> Нет. Напишем один раз в Телеграм. Консультация, только если сама захочешь</p>' +
+          '<p><b>Я ещё не решила.</b> Для этого и канал. Посмотришь эфиры и разборы, а решишь потом</p>' +
+          '<p><b>Я ни разу не снимала, мне страшно.</b> Сайхо тоже ни разу не снимала. Первый рилс сняла на второй день</p>' +
+          '<p><b>Работа, дети, нет времени.</b> Задания не сгорают. Пропустила день, догоняешь в своём темпе</p>' +
+          '<p><b>Я живу не в России.</b> Оплата картой любой страны, для живущих за рубежом можно в 2–3 платежа</p>' +
+        '</div>' +
+        '<button class="btn gap-28" data-act="form">Оставить заявку</button>' +
+        (inTG ? '' : '<button class="textlink gap-20" data-act="restart" style="color:var(--white)">Пройти тест заново</button>') +
+      '</div></section>' +
+      '<div class="sticky-cta" id="stickyCta"><button class="btn" data-act="form">Оставить заявку</button></div>';
   }
 
   function fitLabel(h) {
@@ -485,7 +514,7 @@
       };
       fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
     }
-    var bar = document.getElementById('stickyCta'), offer = document.getElementById('offer'), hero = app.querySelector('.hero');
+    var bar = document.getElementById('stickyCta'), offer = document.getElementById('ap'), hero = app.querySelector('.hero');
     if (!bar || !offer || !('IntersectionObserver' in window)) return;
     var pastHero = false, offerVisible = false;
     var upd = function () { bar.classList.toggle('is-on', pastHero && !offerVisible); };
@@ -526,14 +555,11 @@
   }
 
   function vDone() {
-    var hasChannel = !!CONFIG.channelUrl;
     return '<section class="screen done"><div class="col">' +
       '<h1 class="display"><span class="label label--slap">Готово!</span></h1>' +
-      '<p class="lead gap-28">' + (hasChannel
-        ? 'Анкета у нас. Заходи в закрытый канал. Там всё про Большую Игру 2.0 и самая низкая цена'
-        : 'Анкета у нас. Нажми кнопку и напиши моей команде, откроем тебе доступ в закрытый канал') + '</p>' +
+      '<p class="lead gap-28">Ты в предзаписи на Большую Игру 2.0. Заходи в закрытый канал. Запись разбора рилсов уже там, а эфиры будут только для своих</p>' +
       '<div class="gap-36">' +
-        (hasChannel ? '<button class="btn" data-act="channel">Перейти в канал</button>' : '<button class="btn" data-act="team">Написать команде</button>') +
+        '<button class="btn" data-act="channel">Перейти в закрытый канал</button>' +
         '<button class="textlink gap-10" data-act="show-result">Вернуться к моему результату</button>' +
       '</div></div></section>';
   }
@@ -557,7 +583,7 @@
     else if (act === 'chip') chip(el);
     else if (act === 'tg-phone') tgPhone();
     else if (act === 'form-next') formNext();
-    else if (act === 'channel') openLink(CONFIG.channelUrl);
+    else if (act === 'channel') { if (CONFIG.channelUrl) openLink(CONFIG.channelUrl); else toast('Здесь будет ссылка на закрытый канал'); }
     else if (act === 'team') openLink(CONFIG.teamUrl);
   });
   app.addEventListener('input', function (e) {
