@@ -184,14 +184,8 @@ a { color: inherit; }
 
 /* ── Результат ────────────────────────────────────────── */
 .hero { padding-top: calc(20px + env(safe-area-inset-top)); padding-bottom: 40px; }
-.hero__stage { position: relative; margin-top: 14px; padding-top: 142px; }
-.hero__sticker {
-  position: absolute; right: 2px; top: 0; width: 132px;
-  transform: rotate(7deg);
-  filter: drop-shadow(0 10px 16px rgba(92, 43, 46, .35));
-  animation: rise .5s var(--ease) .35s both;
-}
-.hero__you { font-family: var(--f-display); font-weight: 800; font-size: 22px; }
+.hero__stage { margin-top: 44px; }
+.hero__you { font-family: var(--f-display); font-weight: 800; font-size: 24px; }
 .hero__name { margin-top: 8px; white-space: nowrap; }
 .hero__name.is-wrap { white-space: normal; }
 .hero__tag { margin-top: 22px; }

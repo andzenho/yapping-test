@@ -393,7 +393,6 @@
       '<section class="band hero"><div class="col">' +
         '<div class="topbar">' + (inTG ? '<span></span>' : '<button class="back" data-act="restart">Пройти заново</button>') + '<span class="count">Твой тип блогера</span></div>' +
         '<div class="hero__stage">' +
-          '<img class="hero__sticker" src="assets/stickers/' + esc(t.sticker) + '.webp" alt="">' +
           '<p class="hero__you">' + (name ? esc(name) + ', ты' : 'Ты') + '</p>' +
           '<h1 class="display hero__name"><span class="label label--slap">' + esc(t.name) + '!</span></h1>' +
         '</div>' +
@@ -668,7 +667,7 @@
         sheet.className = 'sheet';
         sheet.innerHTML = '<img src="' + url + '" alt="Карточка результата"><p>Нажми на картинку и удерживай, чтобы сохранить. Потом выложи в сторис</p>' +
           '<a class="btn" href="' + url + '" download="kakoy-ty-blogger.png">Скачать картинку</a>' +
-          '<button class="btn btn--ghost" data-close>Закрыть</button>';
+          '<button class="btn btn--line" data-close style="color:#F6EEE2">Закрыть</button>';
         sheet.addEventListener('click', function (e) { if (e.target === sheet || e.target.hasAttribute('data-close')) sheet.remove(); });
         document.body.appendChild(sheet);
       }, 'image/png');
@@ -678,18 +677,15 @@
   function makeCard(t) {
     var fonts = ['900 120px Unbounded', '800 52px Unbounded', '700 40px Manrope', '800 30px Manrope'];
     return Promise.all(fonts.map(function (f) { return document.fonts ? document.fonts.load(f) : null; }))
-      .then(function () { return loadImg('assets/stickers/' + t.sticker + '.webp'); })
-      .then(function (img) {
+      .then(function () {
         var c = document.createElement('canvas'); c.width = 1080; c.height = 1920;
         var x = c.getContext('2d');
         x.fillStyle = '#E3768B'; x.fillRect(0, 0, 1080, 1920);
         x.textAlign = 'center'; x.textBaseline = 'alphabetic';
-        x.fillStyle = 'rgba(246,238,226,.9)'; x.font = '800 34px Manrope';
-        x.fillText('Тест Карины · kerry.catt', 540, 170);
-        var iw = 640, ih = img.height / img.width * iw;
-        x.save(); x.translate(540, 250 + ih / 2); x.rotate(-0.04); x.drawImage(img, -iw / 2, -ih / 2, iw, ih); x.restore();
-        var y = 250 + ih + 110;
-        x.fillStyle = '#F6EEE2'; x.font = '800 64px Unbounded'; x.fillText('Я', 540, y);
+        x.fillStyle = '#1F1F1F'; x.font = '800 40px Manrope';
+        x.fillText('Тест Карины · kerry.catt', 540, 210);
+        var y = 690;
+        x.fillStyle = '#1F1F1F'; x.font = '900 120px Unbounded'; x.fillText('Я', 540, y);
         var lines = wrap(x, t.name.toUpperCase() + '!', 940, '900 {s}px Unbounded', 150, 84);
         y += 40;
         x.font = '900 ' + lines.size + 'px Unbounded';
@@ -702,9 +698,10 @@
           x.restore();
         });
         x.fillStyle = '#F6EEE2';
-        x.font = '700 42px Manrope';
-        var tag = wrap(x, t.tagline, 900, '700 {s}px Manrope', 42, 42);
-        y += 70; tag.forEach(function (l) { x.fillText(l, 540, y); y += 56; });
+        x.fillStyle = '#1F1F1F';
+        var tag = wrap(x, t.tagline, 880, '800 {s}px Manrope', 54, 44);
+        x.font = '800 ' + tag.size + 'px Manrope';
+        y += 110; tag.forEach(function (l) { x.fillText(l, 540, y); y += tag.size * 1.3; });
         x.fillStyle = '#1F1F1F'; roundRect(x, 90, 1600, 900, 170, 40); x.fill();
         x.fillStyle = '#F6EEE2'; x.font = '800 50px Unbounded'; x.fillText('А ТЫ КАКОЙ БЛОГЕР?', 540, 1680);
         x.font = '800 32px Manrope'; x.fillStyle = 'rgba(246,238,226,.8)'; x.fillText('Пройди тест Карины', 540, 1730);
@@ -712,8 +709,9 @@
       });
   }
   function wrap(x, text, maxW, fontTpl, maxSize, minSize) {
-    var size = maxSize, words = String(text).split(' '), lines;
+    var size = maxSize, words = String(text).split(' '), lines, used = maxSize;
     for (; size >= minSize; size -= 6) {
+      used = size;
       x.font = fontTpl.replace('{s}', size);
       lines = []; var cur = '';
       words.forEach(function (w) { var test = cur ? cur + ' ' + w : w; if (x.measureText(test).width > maxW && cur) { lines.push(cur); cur = w; } else cur = test; });
@@ -721,10 +719,9 @@
       var widest = Math.max.apply(null, lines.map(function (l) { return x.measureText(l).width; }));
       if (widest <= maxW && lines.length <= 2) break;
     }
-    lines.size = size; return lines;
+    lines.size = used; return lines;
   }
   function roundRect(x, l, t, w, h, r) { x.beginPath(); x.moveTo(l + r, t); x.arcTo(l + w, t, l + w, t + h, r); x.arcTo(l + w, t + h, l, t + h, r); x.arcTo(l, t + h, l, t, r); x.arcTo(l, t, l + w, t, r); x.closePath(); }
-  function loadImg(src) { return new Promise(function (ok, bad) { var i = new Image(); i.onload = function () { ok(i); }; i.onerror = bad; i.src = src; }); }
 
   /* ── Старт ───────────────────────────────────────────── */
   flush();
