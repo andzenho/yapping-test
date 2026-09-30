@@ -30,10 +30,10 @@
       ['Хочу рассказывать про своё дело, но боюсь, что будет скучно', 'SKUCHNO'],
       ['Веду блог, всё идёт, хочу расти быстрее', 'RASTU']
     ] },
-    { id: 'call', caption: 'Подруге первым делом рассказываешь', text: 'Подруга звонит и спрашивает «ну как ты?». Что ты рассказываешь первым делом?', opts: [
-      ['Что со мной сегодня случилось', 'R'], ['Что меня выбесило', 'P'], ['Как прошёл день, всё подряд', 'D'],
-      ['Что я затеяла и как идёт', 'M'], ['Что творится у меня на работе', 'G'], ['Что нового узнала в своём деле', 'E'],
-      ['Спрашиваю, как она, и чем помочь', 'C']
+    { id: 'stories', caption: 'В сторис чаще всего выкладываешь', text: 'Что ты чаще всего выкладываешь в сторис?', opts: [
+      ['Истории, которые со мной случились', 'R'], ['Своё мнение о том, что происходит', 'P'], ['Свой день, еду, дом, покупки', 'D'],
+      ['Что я начала и как идёт', 'M'], ['Свою работу изнутри или место, где живу', 'G'], ['Полезное из своей профессии', 'E'],
+      ['Советы и находки', 'C'], ['Почти ничего не выкладываю', 'NONE']
     ] },
     { id: 'people', caption: 'Люди тебе говорят', text: 'Что тебе чаще всего говорят люди?', quote: true, opts: [
       ['Ты так рассказываешь, я заслушалась', 'R'], ['Ты одна скажешь как есть', 'P'], ['С тобой так легко', 'D'],
@@ -76,7 +76,7 @@
     ] }
   ];
   var TYPE_QS = QUESTIONS.filter(function (q) { return q.caption; });
-  var MIRROR_ORDER = ['easy', 'people', 'call', 'known', 'post', 'film', 'watch', 'shop'];
+  var MIRROR_ORDER = ['easy', 'people', 'stories', 'known', 'post', 'film', 'watch', 'shop'];
 
   var STATE_TEXT = {
     NOL: 'Тема у тебя есть. Ты просто не знала, где её искать. Теперь знаешь',
@@ -170,7 +170,7 @@
   function shuffled(q) {
     var r = rng(S.orderSeed + QUESTIONS.indexOf(q) * 0.013);
     var list = q.opts.map(function (o, i) { return { t: o[0], v: o[1], i: i }; });
-    var fixed = q.exclusive ? list.filter(function (o) { return o.v === q.exclusive; }) : [];
+    var fixed = list.filter(function (o) { return o.v === q.exclusive || o.v === 'NONE'; });
     var rest = list.filter(function (o) { return fixed.indexOf(o) < 0; });
     if (q.id !== 'state') for (var i = rest.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)); var tmp = rest[i]; rest[i] = rest[j]; rest[j] = tmp; }
     return rest.concat(fixed);
@@ -249,7 +249,7 @@
     var tied = ORDER.filter(function (id) { return counts[id] === max; });
     var main = tied[0];
     if (tied.length > 1) {
-      var pick = ['easy', 'call'].map(function (k) { return LETTER[S.answers[k]]; }).filter(function (id) { return tied.indexOf(id) >= 0; })[0];
+      var pick = ['easy', 'stories'].map(function (k) { return LETTER[S.answers[k]]; }).filter(function (id) { return tied.indexOf(id) >= 0; })[0];
       if (pick) main = pick;
     }
     var rest = ORDER.filter(function (id) { return id !== main; }).sort(function (a, b) { return counts[b] - counts[a]; });
