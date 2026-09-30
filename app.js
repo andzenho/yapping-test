@@ -386,12 +386,13 @@
   /* Скрины кейсов: assets/cases/<имя>-1.jpg … Пока файлов нет, блок не выводится */
   var CASE_SHOTS = {
     saikho: [['saikho-2.jpg', 'Статистика Сайхо с 27 августа по 25 сентября: 474,2 тысячи просмотров, 395 новых подписчиков', 1], ['saikho-1.jpg', 'Профиль Сайхо: 543 подписчика, 474 тысячи просмотров за последние 30 дней']],
+    olga: [['olga-350k.jpg', 'Рилс Ольги «Куда делись мужики?»: 350 тысяч просмотров, 6 196 лайков', 1], ['olga-reel-125k.jpg', 'Рилс Ольги «Куда делись мужики?!»: 962 комментария']],
     masha: [['masha-1.jpg', 'Статистика Маши за август: 251 тысяча просмотров, в 15 раз больше, чем в июле'], ['masha-2.jpg', 'Профиль Маши: 2 166 подписчиков']]
   };
   function shots(id) {
     var list = CASE_SHOTS[id] || [];
     if (!list.length) return '';
-    return '<div class="case__shots">' + list.map(function (f) { return '<button class="shot' + (f[2] ? ' shot--wide' : '') + '" data-act="zoom" data-src="assets/cases/' + f[0] + '" aria-label="Открыть скрин"><img src="assets/cases/' + f[0] + '" alt="' + esc(f[1]) + '" loading="lazy"></button>'; }).join('') + '</div><p class="shots__hint">Листай и нажми, чтобы увеличить</p>';
+    return '<div class="case__shots' + (list.length === 1 ? ' case__shots--one' : '') + '">' + list.map(function (f) { return '<button class="shot' + (f[2] ? ' shot--wide' : '') + '" data-act="zoom" data-src="assets/cases/' + f[0] + '" aria-label="Открыть скрин"><img src="assets/cases/' + f[0] + '" alt="' + esc(f[1]) + '" loading="lazy"></button>'; }).join('') + '</div><p class="shots__hint">' + (list.length === 1 ? 'Нажми, чтобы увеличить' : 'Листай и нажми, чтобы увеличить') + '</p>';
   }
 
   function vResult() {
@@ -529,9 +530,10 @@
           '<article class="case">' +
             '<p class="case__name">Ольга</p>' +
             '<p class="case__who">Психолог, ведёт блог про тревогу</p>' +
-            '<div class="case__stats"><div><b>125 тыс.</b><span>просмотров у второго рилса в Игре</span></div><div><b>2 400</b><span>подписчиков стояло несколько лет до Игры</span></div></div>' +
-            '<p class="case__story">Блог несколько лет не рос. В Игре она записала 3 рилса, и они выстрелили. Больше всего залетали ролики про отношения</p>' +
-            '<button class="chat gap-14" data-act="zoom" data-src="assets/cases/chat-olga.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-olga.jpg" alt="Ольга: блог про тревогу стоял на 2400 несколько лет, записала 3 рилса, и они выстрелили" loading="lazy"></button>' +
+            '<div class="case__stats"><div><b>350 тыс.</b><span>просмотров у второго рилса в Игре</span></div><div><b>2 400</b><span>подписчиков стояло несколько лет до Игры</span></div></div>' +
+            '<p class="case__story">Блог несколько лет не рос. В Игре она записала 3 рилса, и они выстрелили. Второй, «Куда делись мужики?!», в первые дни набрал 125 тысяч, а сейчас у него 350 тысяч просмотров и почти тысяча комментариев</p>' +
+            shots('olga') +
+            '<div class="chats gap-14"><button class="chat" data-act="zoom" data-src="assets/cases/chat-olga-125k.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-olga-125k.jpg" alt="Ольга в чате Игры: сняла второй рилс, залетел на 125 тысяч, такого не было" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-olga.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-olga.jpg" alt="Ольга: блог про тревогу стоял на 2400 несколько лет, записала 3 рилса, и они выстрелили" loading="lazy"></button></div>' +
             '<p class="case__q">«Вы очень круто даёте понимание, что делать. Много где училась, но таких тонкостей не видела»</p>' +
           '</article>' +
         '</div>' +

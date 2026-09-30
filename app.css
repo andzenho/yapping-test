@@ -258,6 +258,9 @@ p, li { text-wrap: pretty; }
 .case__shots::-webkit-scrollbar { display: none; }
 .shot { flex: none; width: 64%; height: min(420px, 110vw); padding: 0; border: 0; border-radius: 14px; overflow: hidden; background: #0C0F14; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; cursor: zoom-in; box-shadow: 0 12px 28px -18px rgba(31, 31, 31, .6); }
 .shot--wide { width: 88%; }
+.case__shots--one { justify-content: center; margin-right: 0; padding-right: 0; }
+.case__shots--one .shot { width: 78%; height: auto; background: none; }
+.case__shots--one .shot img { height: auto; }
 .shots__hint { margin-top: 8px; font-size: 14px; font-weight: 700; color: var(--on-pink-soft); }
 .shot img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .zoom { position: fixed; inset: 0; z-index: 50; background: rgba(20, 20, 20, .92); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 20px 16px; cursor: zoom-out; animation: fade .2s ease both; }
