@@ -256,11 +256,11 @@ p, li { text-wrap: pretty; }
 /* Как проходят 40 дней: путь по дням */
 .path { list-style: none; margin-top: 20px; position: relative; }
 .path::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 40px; width: 2px; background: var(--on-pink-line); }
-.path li { position: relative; padding: 0 0 26px 34px; }
-.path li::before { content: ''; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--soft); border: 3px solid var(--pink); box-sizing: border-box; }
+.path > li { position: relative; padding: 0 0 26px 34px; }
+.path > li::before { content: ''; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--soft); border: 3px solid var(--pink); box-sizing: border-box; }
 .path__when { display: block; font-size: 14px; font-weight: 800; color: var(--terra-ink); }
 .path__what { margin-top: 4px; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.25; }
-.path li > p:last-child { margin-top: 6px; font-size: 16px; line-height: 1.45; color: var(--on-pink-soft); }
+.path > li > p:last-child { margin-top: 6px; font-size: 16px; line-height: 1.45; color: var(--on-pink-soft); }
 .loop { margin-top: 14px; background: var(--white); border-radius: 14px; padding: 6px 16px 14px; box-shadow: 0 10px 26px -20px rgba(31, 31, 31, .55); }
 .loop__step { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1.5px solid var(--on-cream-line); }
 .loop__step b { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--white); font-family: 'Unbounded', sans-serif; font-size: 14px; display: flex; align-items: center; justify-content: center; }
