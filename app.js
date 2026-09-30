@@ -461,8 +461,21 @@
         (t.karina ? '<div class="quote"><img src="assets/karina-avatar.webp" alt=""><div><p>' + esc(t.karina) + '</p><small>Карина</small></div></div>' : '') +
       '</div></section>' +
 
+      '<section class="band magnet" id="magnet"><div class="col">' +
+        '<h2 class="title">Что дальше?</h2>' +
+        '<p class="lead gap-14">Ты узнала свой тип блогера и получила первые идеи для роликов. Теперь посмотри видео, где я показываю, как снять 30 рилс за 40 дней</p>' +
+        '<button class="vcard gap-20" data-act="form" aria-label="Получить видео «Как снять 30 рилс за 40 дней»">' +
+          '<span class="vcard__play" aria-hidden="true"></span>' +
+          '<span class="vcard__title">Как снять 30 рилс за 40 дней</span>' +
+          '<span class="vcard__by">Видео от Карины</span>' +
+        '</button>' +
+        '<p class="gap-20">Видео лежит в закрытом канале предзаписи на Большую Игру 2.0. Заполни короткую анкету, и канал откроется сразу</p>' +
+        '<button class="btn gap-20" data-act="form">Получить видео</button>' +
+        '<p class="small gap-10">Анкета предзаписи. 2 минуты, бесплатно, это не оплата</p>' +
+      '</div></section>' +
+
       '<section class="band band--soft" id="offer"><div class="col">' +
-        '<p class="lead">Темы для старта у тебя есть. Какие из них твои, покажут только ролики. Уникальность ты найдёшь только тогда, когда много снимешь и посмотришь, что ты сделал. Поэтому зову тебя в Большую Игру</p>' +
+        '<p class="eyebrow">На что эта предзапись</p><p class="lead gap-10">Темы для старта у тебя есть. Какие из них твои, покажут только ролики. Уникальность ты найдёшь только тогда, когда много снимешь и посмотришь, что ты сделал. Поэтому зову тебя в Большую Игру</p>' +
         '<h2 class="display gap-36" style="font-size:clamp(34px,10vw,48px)">Большая Игра <span class="label">2.0!</span></h2>' +
         '<p class="lead gap-14">За 40 дней снимешь 30 роликов и найдёшь свои темы, которые набирают десятки тысяч просмотров и приводят подписчиков</p>' +
         '<ul class="facts gap-14"><li class="facts__date">Старт ' + esc(CONFIG.gameStart) + '</li></ul>' +
@@ -530,30 +543,30 @@
         '<p class="lead gap-14">Это не оплата. Ты просто говоришь мне, что хочешь на новый поток. А я сразу даю то, чего не будет у остальных</p>' +
         '<div class="gift gap-28">' +
           '<p class="gift__head">Что получишь за анкету!</p>' +
-          '<div class="gift__item"><span class="gift__tag">Сразу</span><p class="gift__title">Запись разбора рилсов</p><p>Эфир, где я разбираю рилсы участниц Большой Игры</p></div>' +
+          '<div class="gift__item"><span class="gift__tag">Сразу</span><p class="gift__title">Видео «Как снять 30 рилс за 40 дней»</p><p>Откроется сразу после анкеты</p></div>' +
           '<div class="gift__item"><span class="gift__tag">Только для своих</span><p class="gift__title">Закрытый канал предзаписи</p><p>Эфиры, которых нет в открытом доступе. Про Большую Игру 2.0 узнаёшь раньше всех</p></div>' +
           '<div class="gift__item"><span class="gift__tag">Только по анкете</span><p class="gift__title">Самая низкая цена</p><p>Дальше цена на поток будет расти</p></div>' +
           '<div class="gift__item"><span class="gift__tag">Раньше всех</span><p class="gift__title">Место в группе с куратором</p><p>Мест столько, сколько роликов успевают разобрать мои кураторы. О старте продаж узнаешь первой</p></div>' +
         '</div>' +
-        '<button class="btn gap-28" data-act="form">Записаться в предзапись</button>' +
-        '<p class="small gap-10" style="opacity:.8">2 минуты. Бесплатно. Потом сразу откроется канал</p>' +
+        '<button class="btn gap-28" data-act="form">Получить видео</button>' +
+        '<p class="small gap-10" style="opacity:.8">2 минуты. Бесплатно. Сразу откроется канал с видео</p>' +
         '<h3 class="title gap-36" style="font-size:22px">Частые вопросы</h3>' +
         '<div class="faq">' +
           '<p><b>Я уже покупала курсы, толку не было.</b> Обычно курс даёт уроки, а снимать оставляет тебе. Тут ты каждый день снимаешь по заданию, а куратор говорит, что поправить. Просто смотреть уроки не получится</p>' +
           '<p><b>А ты сама там будешь?</b> Главные уроки мои, метод мой. На двух эфирах отвечаю на твои вопросы вживую. Каждый твой ролик разбирает куратор</p>' +
           '<p><b>Это оплата?</b> Нет. Анкета бесплатная и ни к чему не обязывает</p>' +
           '<p><b>Мне будут названивать?</b> Нет. Моя команда напишет один раз в Телеграм. Созвон, только если сама попросишь консультацию</p>' +
-          '<p><b>Я ещё не решила.</b> Для этого и канал. Посмотри эфиры и разборы, а решишь потом</p>' +
+          '<p><b>Я ещё не решила.</b> Для этого и канал. Посмотри видео и эфиры, а решишь потом</p>' +
           '<p><b>Я ни разу не снимала, мне страшно.</b> Сайхо тоже ни разу не снимала. Первый рилс в жизни она сняла на второй день Игры. Первую неделю ты снимаешь 3 пробных ролика вместе с мини-группой и куратором. Одна не останешься</p>' +
           '<p><b>Работа, дети, нет времени.</b> Сайхо во время Игры работала и училась. На всё она не успевала, а её ролики за месяц набрали 474 тысячи просмотров. Задания не сгорают, догонишь в своём темпе</p>' +
           '<p><b>Боюсь, что увидят на работе.</b> Про работу можно вообще не снимать. Тему в первую неделю выбираешь с куратором, и она может быть совсем не про работу</p>' +
           '<p><b>Мне нужны клиенты, а не просмотры.</b> Заявки с первых роликов не обещаю. Клиенты приходят к той, кого видят каждый день и кому верят. Маша психолог, за Игру выложила 43 ролика, подписчиков стало 2 166 вместо 747. А про первые продажи с блога есть отдельный урок</p>' +
           '<p><b>Я живу не в России.</b> Оплата картой любой страны</p>' +
         '</div>' +
-        '<button class="btn gap-28" data-act="form">Записаться в предзапись</button>' +
+        '<button class="btn gap-28" data-act="form">Получить видео</button>' +
         (inTG ? '' : '<button class="textlink gap-20" data-act="restart" style="color:var(--white)">Пройти тест заново</button>') +
       '</div></section>' +
-      '<div class="sticky-cta" id="stickyCta"><button class="btn" data-act="form">Записаться в предзапись</button></div>';
+      '<div class="sticky-cta" id="stickyCta"><button class="btn" data-act="form">Получить видео</button></div>';
   }
 
   function fitLabel(h) {
@@ -583,10 +596,11 @@
       };
       fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
     }
-    var bar = document.getElementById('stickyCta'), offer = document.getElementById('ap'), hero = app.querySelector('.hero');
+    var bar = document.getElementById('stickyCta'), offer = document.getElementById('ap'), magnet = document.getElementById('magnet'), hero = app.querySelector('.hero');
     if (!bar || !offer || !('IntersectionObserver' in window)) return;
-    var pastHero = false, offerVisible = false;
-    var upd = function () { bar.classList.toggle('is-on', pastHero && !offerVisible); };
+    var pastHero = false, offerVisible = false, magnetVisible = false;
+    var upd = function () { bar.classList.toggle('is-on', pastHero && !offerVisible && !magnetVisible); };
+    if (magnet) new IntersectionObserver(function (es) { magnetVisible = es[0].isIntersecting; upd(); }, { threshold: 0.1 }).observe(magnet);
     new IntersectionObserver(function (es) { pastHero = !es[0].isIntersecting; upd(); }).observe(hero);
     new IntersectionObserver(function (es) { offerVisible = es[0].isIntersecting; upd(); }, { threshold: 0.1 }).observe(offer);
   }
@@ -617,7 +631,8 @@
     return '<section class="screen form-screen"><div class="col">' +
       '<div class="topbar">' + (inTG ? '<span></span>' : '<button class="back" data-act="back">Назад</button>') + '<span class="count">Шаг ' + (S.step + 1) + ' из ' + FORM.length + '</span></div>' +
       '<div class="progress"><i style="width:' + Math.round(S.step / FORM.length * 100) + '%"></i></div>' +
-      '<p class="form__kicker">Анкета на Большую Игру 2.0</p>' +
+      '<p class="form__kicker">Анкета предзаписи на Большую Игру 2.0</p>' +
+      (S.step === 0 ? '<p class="form__lead gap-6">Заполни, и сразу откроется закрытый канал с видео «Как снять 30 рилс за 40 дней»</p>' : '') +
       '<h2 class="title gap-6">' + esc(st.title) + '</h2>' +
       fields +
       '<div class="q__foot"><button class="btn" data-act="form-next">' + (last ? 'Отправить анкету' : 'Дальше') + '</button></div>' +
@@ -627,9 +642,9 @@
   function vDone() {
     return '<section class="screen done"><div class="col">' +
       '<h1 class="display"><span class="label label--slap">Готово!</span></h1>' +
-      '<p class="lead gap-28">Ты в предзаписи на Большую Игру 2.0. Заходи в закрытый канал. Запись разбора рилсов уже там, а эфиры будут только для своих</p>' +
+      '<p class="lead gap-28">Ты в предзаписи на Большую Игру 2.0. Видео «Как снять 30 рилс за 40 дней» уже ждёт в закрытом канале. Там же эфиры только для своих и самая низкая цена на поток</p>' +
       '<div class="gap-36">' +
-        '<button class="btn" data-act="channel">Перейти в закрытый канал</button>' +
+        '<button class="btn" data-act="channel">Смотреть видео в канале</button>' +
         '<button class="textlink gap-10" data-act="show-result">Вернуться к моему результату</button>' +
       '</div></div></section>';
   }
