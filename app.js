@@ -113,7 +113,7 @@
   var LIMIT_WORDS = {
     kids: /ребён|ребен|(^|[^а-яё])дет(и|ей|ьми|ям|ях)([^а-яё]|$)|(^|[^а-яё])(сын|доч)/i,
     muzh: /муж|познакомил|свидани|свекров/i,
-    work: /работ|рабоч|клиент|професси|уволи|мастер|коллег|специалист|сфер[аеуыо]|в моей теме|моё дело|ко мне идти/i,
+    work: /найм|работ|рабоч|клиент|професси|уволи|мастер|коллег|специалист|сфер[аеуыо]|в моей теме|моё дело|ко мне идти/i,
     age: /возраст|после 35|за 40|40 /i,
     past: /боюсь|рухнул/i
   };
@@ -503,9 +503,9 @@
         '<div class="cases">' +
           '<article class="case">' +
             '<p class="case__name">Сайхо</p>' +
-            '<p class="case__who">Работает и учится в магистратуре</p>' +
+            '<p class="case__who">Учится в магистратуре</p>' +
             '<div class="case__stats"><div><b>71 тыс.</b><span>просмотров у одного ролика</span></div><div><b>543</b><span>подписчика, было 140</span></div></div>' +
-            '<p class="case__story">В Игре снимала задания, а сверху ещё тренды. Один её ролик набрал 71 тысячу просмотров, другой, где она ест и рассказывает, какой вкус у продукта, 47 тысяч. За месяц Игры её ролики посмотрели 474 тысячи раз</p>' +
+            '<p class="case__story">Первый рилс в жизни сняла на второй день Игры. Дальше снимала задания, а сверху ещё тренды. Один её ролик набрал 71 тысячу просмотров, другой, где она ест и рассказывает, какой вкус у продукта, 47 тысяч. За месяц Игры её ролики посмотрели 474 тысячи раз</p>' +
             shots('saikho') +
             '<p class="case__q">«За время курса я поняла, что блогинг\u00A0— это большой труд. Я думала, заснять, <span class="nw">чик-чик</span> и всё»</p>' +
           '</article>' +
@@ -517,9 +517,17 @@
             shots('masha') +
             '<p class="case__q">«Ценные уроки, я успела всё, так как без воды и с чётко поставленной задачей»</p>' +
           '</article>' +
+          '<article class="case">' +
+            '<p class="case__name">Ольга</p>' +
+            '<p class="case__who">Психолог, ведёт блог про тревогу</p>' +
+            '<div class="case__stats"><div><b>125 тыс.</b><span>просмотров у второго рилса в Игре</span></div><div><b>2 400</b><span>подписчиков стояло несколько лет до Игры</span></div></div>' +
+            '<p class="case__story">Блог несколько лет не рос. В Игре она записала 3 рилса, и они выстрелили. Больше всего залетали ролики про отношения</p>' +
+            '<button class="chat gap-14" data-act="zoom" data-src="assets/cases/chat-olga.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-olga.jpg" alt="Ольга: блог про тревогу стоял на 2400 несколько лет, записала 3 рилса, и они выстрелили" loading="lazy"></button>' +
+            '<p class="case__q">«Вы очень круто даёте понимание, что делать. Много где училась, но таких тонкостей не видела»</p>' +
+          '</article>' +
         '</div>' +
         '<h3 class="title gap-36" style="font-size:22px">И ещё из чата участниц!</h3>' +
-        '<div class="chats"><button class="chat" data-act="zoom" data-src="assets/cases/chat-olga.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-olga.jpg" alt="Ольга: блог про тревогу стоял на 2400 подписчиках несколько лет, записала 3 рилса, и они выстрелили" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-velunova-stats.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-velunova-stats.jpg" alt="VELUNOVA: статистика рилсов, 28 798 и 12 374 просмотра" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-anon-stats.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-anon-stats.jpg" alt="Статистика рилса участницы: 35 700 просмотров, 136 подписок" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-viktoria.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-viktoria.jpg" alt="Виктория: ролик залетел, я все ваши советы использовала" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-saikho-47k.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-saikho-47k.jpg" alt="Сайхо: рилс, где я ем и комментирую вкус продукта, набрал 47 тысяч просмотров" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-velunova-blogger.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-velunova-blogger.jpg" alt="VELUNOVA: осознаю, что за этот месяц реально обучусь мыслить как блогер" loading="lazy"></button></div>' +
+        '<div class="chats"><button class="chat" data-act="zoom" data-src="assets/cases/chat-velunova-stats.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-velunova-stats.jpg" alt="VELUNOVA: статистика рилсов, 28 798 и 12 374 просмотра" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-anon-stats.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-anon-stats.jpg" alt="Статистика рилса участницы: 35 700 просмотров, 136 подписок" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-viktoria.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-viktoria.jpg" alt="Виктория: ролик залетел, я все ваши советы использовала" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-saikho-47k.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-saikho-47k.jpg" alt="Сайхо: рилс, где я ем и комментирую вкус продукта, набрал 47 тысяч просмотров" loading="lazy"></button><button class="chat" data-act="zoom" data-src="assets/cases/chat-velunova-blogger.jpg" aria-label="Открыть скрин"><img src="assets/cases/chat-velunova-blogger.jpg" alt="VELUNOVA: осознаю, что за этот месяц реально обучусь мыслить как блогер" loading="lazy"></button></div>' +
       '</div></section>' +
 
       '<section class="band band--ink" id="ap"><div class="col">' +
@@ -542,7 +550,7 @@
           '<p><b>Мне будут названивать?</b> Нет. Моя команда напишет один раз в Телеграм. Созвон, только если сама попросишь консультацию</p>' +
           '<p><b>Я ещё не решила.</b> Для этого и канал. Посмотри эфиры и разборы, а решишь потом</p>' +
           '<p><b>Я ни разу не снимала, мне страшно.</b> Первую неделю ты снимаешь 3 пробных ролика вместе с мини-группой и куратором. Одна не останешься</p>' +
-          '<p><b>Работа, дети, нет времени.</b> Сайхо работает и учится. На всё она не успевала, а её ролики за месяц набрали 474 тысячи просмотров. Задания не сгорают, догонишь в своём темпе</p>' +
+          '<p><b>Работа, дети, нет времени.</b> Сайхо во время Игры работала и училась. На всё она не успевала, а её ролики за месяц набрали 474 тысячи просмотров. Задания не сгорают, догонишь в своём темпе</p>' +
           '<p><b>Боюсь, что увидят на работе.</b> Про работу можно вообще не снимать. Тему в первую неделю выбираешь с куратором, и она может быть совсем не про работу</p>' +
           '<p><b>Мне нужны клиенты, а не просмотры.</b> Заявки с первых роликов не обещаю. Клиенты приходят к той, кого видят каждый день и кому верят. Маша психолог, за Игру выложила 43 ролика, подписчиков стало 2 166 вместо 747. А про первые продажи с блога есть отдельный урок</p>' +
           '<p><b>Я живу не в России.</b> Оплата картой любой страны</p>' +
