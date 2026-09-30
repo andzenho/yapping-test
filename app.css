@@ -253,6 +253,11 @@ p, li { text-wrap: pretty; }
 .path__when { display: block; font-size: 14px; font-weight: 800; color: var(--terra-ink); }
 .path__what { margin-top: 4px; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.25; }
 .path li > p:last-child { margin-top: 6px; font-size: 16px; line-height: 1.45; color: var(--on-pink-soft); }
+.loop { margin-top: 14px; background: var(--white); border-radius: 14px; padding: 6px 16px 14px; box-shadow: 0 10px 26px -20px rgba(31, 31, 31, .55); }
+.loop__step { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1.5px solid var(--on-cream-line); }
+.loop__step b { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--white); font-family: 'Unbounded', sans-serif; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+.loop__step p { font-size: 16px; font-weight: 700; line-height: 1.4; padding-top: 3px; }
+.loop__again { margin-top: 12px; font-size: 15px; font-weight: 800; color: var(--terra-ink); }
 .path .path__end { margin-top: 4px; padding: 20px 18px 20px 52px; background: var(--ink); color: var(--white); border-radius: 14px; }
 .path .path__end::before { left: 18px; top: 24px; background: var(--pink); border-color: var(--pink); }
 .path .path__end .path__when { color: var(--pink); }
