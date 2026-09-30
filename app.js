@@ -154,8 +154,8 @@
   if (inTG) {
     try {
       W.ready(); W.expand();
-      if (W.setHeaderColor) W.setHeaderColor('#E3768B');
-      if (W.setBackgroundColor) W.setBackgroundColor('#E3768B');
+      if (W.setHeaderColor) W.setHeaderColor('#FFFFFF');
+      if (W.setBackgroundColor) W.setBackgroundColor('#FFFFFF');
       if (W.disableVerticalSwipes) W.disableVerticalSwipes();
     } catch (e) { /* старый клиент */ }
   }
@@ -316,10 +316,9 @@
     var html = ({ start: vStart, q: vQuestion, calc: vCalc, result: vResult, form: vForm, done: vDone })[screen]();
     app.innerHTML = html;
     typograf(app);
-    document.body.style.background = screen === 'form' ? 'var(--cream)' : 'var(--pink)';
     if (screen === 'result') afterResult();
     if (screen === 'start' || screen === 'done') fitLabel(app.querySelector('.display'));
-    if (inTG && W.setBackgroundColor) { try { W.setBackgroundColor(screen === 'form' ? '#F6EEE2' : '#E3768B'); W.setHeaderColor(screen === 'form' ? '#F6EEE2' : '#E3768B'); } catch (e) {} }
+    if (inTG && W.setBackgroundColor) { try { W.setBackgroundColor('#FFFFFF'); W.setHeaderColor('#FFFFFF'); } catch (e) {} }
   }
 
   function vStart() {
@@ -406,7 +405,7 @@
     var state = STATE_TEXT[S.answers.state];
 
     return '' +
-      '<section class="band hero"><div class="col">' +
+      '<section class="band band--pink hero"><div class="col">' +
         '<div class="topbar">' + (inTG ? '<span></span>' : '<button class="back" data-act="restart">Пройти заново</button>') + '<span class="count">Твой тип блогера</span></div>' +
         '<div class="hero__stage">' +
           '<p class="hero__you">' + (name ? esc(name) + ', ты' : 'Ты') + '</p>' +
@@ -417,7 +416,7 @@
         '<div class="split">' + split + '</div>' +
       '</div></section>' +
 
-      '<section class="band band--cream"><div class="col">' +
+      '<section class="band"><div class="col">' +
         (mirror ? '<h2 class="title">Смотри, почему</h2><div class="rows">' + mirror + '</div>' : '') +
         '<h2 class="title gap-36">За что тебя будут смотреть</h2><p class="lead gap-14">' + esc(t.why) + '</p>' +
         (state ? '<p class="gap-20">' + esc(state) + '</p>' : '') +
@@ -425,13 +424,13 @@
         '<p class="gap-14"><b>Как найти свою прямо сейчас.</b> ' + esc(cap(t.find)) + '</p>' +
       '</div></section>' +
 
-      '<section class="band"><div class="col">' +
+      '<section class="band band--tint"><div class="col">' +
         '<h2 class="title">Примеры тем, которые идеально зайдут под твой тип блогера</h2>' +
         '<ul class="topics">' + topics + '</ul>' +
         '<button class="textlink gap-10" data-act="copy-topics">Скопировать все темы</button>' +
       '</div></section>' +
 
-      '<section class="band band--cream"><div class="col">' +
+      '<section class="band"><div class="col">' +
         '<h2 class="title">5 готовых роликов. Бери и снимай!</h2>' +
         '<div class="gap-20">' + reels + '</div>' +
       '</div></section>' +
@@ -442,7 +441,7 @@
         (lim ? '<ul class="limits">' + lim + '</ul>' : '') +
       '</div></section>' +
 
-      '<section class="band" id="offer"><div class="col">' +
+      '<section class="band band--pink" id="offer"><div class="col">' +
         '<p class="lead">Темы у тебя есть. Дальше всё решает одно. Снимаешь ты каждый день или нет. И есть ли рядом тот, кто подскажет, что поправить</p>' +
         '<h2 class="display gap-36" style="font-size:clamp(34px,10vw,48px)">Большая Игра <span class="label">2.0!</span></h2>' +
         '<p class="lead gap-14">Старт ' + esc(CONFIG.gameStart) + '. Заполни анкету на новый поток</p>' +
