@@ -5,9 +5,11 @@
 
 :root {
   --pink: #E3768B;
+  --pink-ink: #C94F6A;
   --cream: #F6EEE2;
   --white: #FFFFFF;
   --pink-tint: #FBE8EC;
+  --soft: #F4F3F0;
   --ink: #1F1F1F;
   --terra: #C05B3B;
   --terra-ink: #A0472B; /* терракота для текста на креме, контраст 5,3:1 */
@@ -46,7 +48,7 @@ img { display: block; max-width: 100%; }
 a { color: inherit; }
 
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@keyframes slap { 0% { opacity: 0; transform: scale(1.25) rotate(-6deg); } 60% { opacity: 1; transform: scale(.97) rotate(-1.5deg); } 100% { transform: scale(1) rotate(-2deg); } }
+@keyframes slap { 0% { opacity: 0; transform: scale(1.18); } 60% { opacity: 1; transform: scale(.97); } 100% { transform: scale(1); } }
 @keyframes grow { from { transform: scaleX(0); } }
 @keyframes wobble { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
@@ -66,6 +68,7 @@ a { color: inherit; }
 .band { padding: 40px var(--gutter) 44px; }
 .band--pink { background: var(--pink); color: var(--ink); }
 .band--tint { background: var(--pink-tint); color: var(--ink); }
+.band--soft { background: var(--soft); color: var(--ink); }
 .band--cream { background: var(--cream); color: var(--ink); }
 .band--ink { background: var(--ink); color: var(--cream); }
 
@@ -96,14 +99,9 @@ p, li { text-wrap: pretty; }
 /* Фирменная плашка-наклейка */
 .label {
   display: inline-block;
-  background: var(--pink);
-  color: var(--ink);
-  padding: .08em .16em .02em;
-  transform: rotate(-2deg);
-  box-shadow: 0 10px 24px -14px rgba(92, 43, 46, .75);
+  color: var(--pink-ink);
 }
 .label--slap { animation: slap .6s var(--ease) .15s both; }
-.band--pink .label { background: var(--white); }
 
 /* ── Кнопки ───────────────────────────────────────────── */
 .btn {
@@ -228,8 +226,15 @@ p, li { text-wrap: pretty; }
 .quote img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex: none; }
 .quote p { font-weight: 700; font-size: 18px; line-height: 1.35; }
 .quote small { display: block; margin-top: 4px; font-size: 14px; font-weight: 700; opacity: .7; }
-.limits { list-style: none; margin-top: 22px; }
-.limits li { padding: 10px 0; border-top: 1.5px solid rgba(246, 238, 226, .22); font-weight: 600; }
+.limits-note { padding-left: 14px; border-left: 3px solid var(--pink); font-weight: 600; }
+.limits-note p + p { margin-top: 8px; }
+.cases { margin-top: 18px; border-top: 1.5px solid var(--on-pink-line); }
+.case { padding: 22px 0; border-bottom: 1.5px solid var(--on-pink-line); }
+.case__num { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 44px; line-height: 1; letter-spacing: -.02em; color: var(--pink-ink); }
+.case__cap { margin-top: 6px; font-weight: 700; }
+.case__who { margin-top: 14px; font-size: 17px; line-height: 1.4; }
+.nw { white-space: nowrap; }
+.case__q { margin-top: 12px; font-size: 17px; line-height: 1.4; font-style: italic; }
 
 .offer__list { list-style: none; margin-top: 18px; }
 .offer__list li { padding: 12px 0; border-top: 1.5px solid var(--on-pink-line); font-weight: 700; font-size: 18px; line-height: 1.35; }
