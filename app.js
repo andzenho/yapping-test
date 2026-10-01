@@ -149,6 +149,8 @@
   var user = inTG && W.initDataUnsafe && W.initDataUnsafe.user ? W.initDataUnsafe.user : null;
   var params = new URLSearchParams(location.search);
   var source = (inTG && W.initDataUnsafe.start_param) || params.get('src') || params.get('utm_source') || 'direct';
+  // Ссылка с меткой, которая начинается на anketa (например startapp=anketa_bot), открывает сразу анкету предзаписи, без теста.
+  var wantForm = /^anketa/.test(source);
 
   if (inTG) {
     try {
@@ -311,7 +313,7 @@
   if (inTG && W.BackButton) W.BackButton.onClick(function () { back(); });
   function back() {
     if (screen === 'q') { if (S.idx > 0) { S.idx--; save(); go('q'); } else go('start'); }
-    else if (screen === 'form') { if (S.step > 0) { S.step--; save(); go('form'); } else go('result'); }
+    else if (screen === 'form') { if (S.step > 0) { S.step--; save(); go('form'); } else go(S.result ? 'result' : 'start'); }
     else if (screen === 'result') go('start');
   }
 
@@ -790,6 +792,7 @@
   /* ── Старт ───────────────────────────────────────────── */
   flush();
   if (S.sent && S.sent.lead) go('done');
+  else if (wantForm) { prefillForm(); S.step = 0; save(); go('form'); }
   else if (S.result && params.get('fresh') !== '1') go('result');
   else go('start');
 })();
