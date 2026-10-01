@@ -41,8 +41,33 @@ function setup() {
   return 'ok';
 }
 
-function doGet() {
-  return json_({ ok: true, service: 'kerry-yapping-test' });
+/**
+ * GET ?tg=<Telegram id> отвечает боту в ChatPlace, прошла ли она тест и заполнила ли анкету:
+ * { ok: true, test: "1" | "0", lead: "1" | "0" }. Наружу отдаём только эти два флага.
+ */
+function doGet(e) {
+  const id = e && e.parameter && String(e.parameter.tg || '').replace(/\D/g, '');
+  if (!id) return json_({ ok: true, service: 'kerry-yapping-test' });
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  return json_({
+    ok: true,
+    test: hasTg_(ss, SHEET_TEST, HEAD_TEST, id) ? '1' : '0',
+    lead: hasTg_(ss, SHEET_LEADS, HEAD_LEADS, id) ? '1' : '0'
+  });
+}
+
+// Сравниваем по строковому значению: id в ячейке может лежать числом, текстом или с пробелами.
+function hasTg_(ss, name, head, id) {
+  const sh = ss.getSheetByName(name);
+  if (!sh || sh.getLastRow() < 2) return false;
+  const col = head.indexOf('TG id') + 1;
+  const vals = sh.getRange(2, col, sh.getLastRow() - 1, 1).getValues();
+  for (var i = 0; i < vals.length; i++) {
+    const v = vals[i][0];
+    const s = typeof v === 'number' ? v.toFixed(0) : String(v).replace(/\D/g, '');
+    if (s === id) return true;
+  }
+  return false;
 }
 
 function doPost(e) {
