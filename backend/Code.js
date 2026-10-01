@@ -42,17 +42,35 @@ function setup() {
 }
 
 /**
- * GET ?tg=<Telegram id> отвечает боту в ChatPlace, прошла ли она тест и заполнила ли анкету:
+ * GET ?tg=<id>&u=<ник без @> отвечает боту в ChatPlace, прошла ли она тест и заполнила ли анкету:
  * { ok: true, test: "1" | "0", lead: "1" | "0" }. Наружу отдаём только эти два флага.
+ * Человек найден, если совпал TG id или ник. ChatPlace отдаёт свой id, а не Telegram id, поэтому ник обязателен.
  */
 function doGet(e) {
-  const id = e && e.parameter && String(e.parameter.tg || '').replace(/\D/g, '');
-  if (!id) return json_({ ok: true, service: 'kerry-yapping-test' });
+  const p = (e && e.parameter) || {};
+  const id = String(p.tg || '').replace(/\D/g, '');
+  const nick = nick_(p.u);
+  if (!id && !nick) return json_({ ok: true, service: 'kerry-yapping-test' });
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  return json_({
-    ok: true,
-    test: hasTg_(ss, SHEET_TEST, HEAD_TEST, id) ? '1' : '0',
-    lead: hasTg_(ss, SHEET_LEADS, HEAD_LEADS, id) ? '1' : '0'
+  const test = (id && hasTg_(ss, SHEET_TEST, HEAD_TEST, id)) || (nick && hasNick_(ss, SHEET_TEST, HEAD_TEST, ['TG ник'], nick));
+  const lead = (id && hasTg_(ss, SHEET_LEADS, HEAD_LEADS, id)) || (nick && hasNick_(ss, SHEET_LEADS, HEAD_LEADS, ['TG ник', 'Ник в Телеграме'], nick));
+  return json_({ ok: true, test: test ? '1' : '0', lead: lead ? '1' : '0' });
+}
+
+// Ник без @, пробелов, ссылки t.me и регистра. Пустая строка значит «ника нет».
+function nick_(v) {
+  return String(v || '').toLowerCase().replace(/\s+/g, '').replace(/^(https?:\/\/)?(www\.)?t\.me\//, '').replace(/^@+/, '');
+}
+
+function hasNick_(ss, name, head, cols, nick) {
+  const sh = ss.getSheetByName(name);
+  if (!sh || sh.getLastRow() < 2 || !nick) return false;
+  return cols.some(function (c) {
+    const col = head.indexOf(c) + 1;
+    if (!col) return false;
+    const vals = sh.getRange(2, col, sh.getLastRow() - 1, 1).getValues();
+    for (var i = 0; i < vals.length; i++) { const n = nick_(vals[i][0]); if (n && n === nick) return true; }
+    return false;
   });
 }
 

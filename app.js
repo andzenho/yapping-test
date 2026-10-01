@@ -151,6 +151,8 @@
   var source = (inTG && W.initDataUnsafe.start_param) || params.get('src') || params.get('utm_source') || 'direct';
   // Ссылка с меткой, которая начинается на anketa (например startapp=anketa_bot), открывает сразу анкету предзаписи, без теста.
   var wantForm = /^anketa/.test(source);
+  // Ссылка startapp=retest (или ?src=retest) стирает сохранённый результат и открывает тест с начала, чтобы прохождение снова ушло в таблицу.
+  var wantRetest = source === 'retest';
 
   if (inTG) {
     try {
@@ -791,7 +793,8 @@
 
   /* ── Старт ───────────────────────────────────────────── */
   flush();
-  if (S.sent && S.sent.lead) go('done');
+  if (wantRetest) { var keepForm = S.form, keepLead = !!(S.sent && S.sent.lead); S = fresh(); S.form = keepForm; S.sent.lead = keepLead; save(); go('start'); }
+  else if (S.sent && S.sent.lead) go('done');
   else if (wantForm) { prefillForm(); S.step = 0; save(); go('form'); }
   else if (S.result && params.get('fresh') !== '1') go('result');
   else go('start');
