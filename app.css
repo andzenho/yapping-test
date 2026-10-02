@@ -432,3 +432,9 @@ textarea.input { min-height: 64px; resize: vertical; }
 .faq { margin-top: 14px; }
 .faq p { padding: 12px 0; border-top: 1.5px solid rgba(255, 255, 255, .18); font-size: 16px; line-height: 1.45; }
 .faq b { font-weight: 800; }
+
+/* Согласия в анкете */
+.consent { display: grid; gap: 12px; }
+.chk { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--on-cream-soft); cursor: pointer; }
+.chk input { flex: none; width: 20px; height: 20px; margin: 0; accent-color: var(--ink); }
+.chk a { color: var(--ink); text-decoration: underline; }

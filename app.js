@@ -11,7 +11,10 @@
     // Ссылка-приглашение в закрытый канал предзаписи (АП), открывается после анкеты.
     channelUrl: 'https://t.me/+7Ztd-hWfnkJlMTk6',
     teamUrl: 'https://t.me/kerryhelper',
-    gameStart: '16 ноября'
+    gameStart: '16 ноября',
+    // Документы (редакция от 02.10.2026). Галки на последнем шаге анкеты.
+    docs: 'https://andzenho.github.io/razminka-landing/',
+    docsRev: '2026-10-02'
   };
 
   var STORE = 'kc_blogger_test_v1';
@@ -638,9 +641,20 @@
       '<p class="form__kicker">Анкета предзаписи на Большую Игру 2.0</p>' +
       (S.step === 0 ? '<p class="form__lead gap-6">Заполни, и сразу откроется закрытый канал с видео «Как снять 30 рилс за 40 дней»</p>' : '') +
       '<h2 class="title gap-6">' + esc(st.title) + '</h2>' +
-      fields +
+      fields + (last ? vConsent() : '') +
       '<div class="q__foot"><button class="btn" data-act="form-next">' + (last ? 'Отправить анкету' : 'Дальше') + '</button></div>' +
       '</div></section>';
+  }
+
+  function vConsent() {
+    function doc(path, t) { return '<a href="' + CONFIG.docs + path + '/" data-act="doc">' + t + '</a>'; }
+    function box(id, html) {
+      return '<label class="chk"><input type="checkbox" data-c="' + id + '"' + (S.form[id] ? ' checked' : '') + '><span>' + html + '</span></label>';
+    }
+    return '<div class="consent field" data-field="consent_pd">' +
+      box('consent_pd', 'Даю ' + doc('consent', 'согласие на обработку персональных данных') + ' и принимаю ' + doc('privacy', 'Политику обработки персональных данных')) +
+      box('consent_ads', 'Согласен(на) получать ' + doc('consent-ads', 'рекламные и информационные сообщения') + '. Необязательно') +
+      '</div>';
   }
 
   function vDone() {
@@ -681,6 +695,12 @@
     else if (act === 'form-next') formNext();
     else if (act === 'channel') { if (CONFIG.channelUrl) openLink(CONFIG.channelUrl); else toast('Здесь будет ссылка на закрытый канал'); }
     else if (act === 'team') openLink(CONFIG.teamUrl);
+    else if (act === 'doc') { e.preventDefault(); openLink(el.getAttribute('href')); }
+  });
+  app.addEventListener('change', function (e) {
+    var c = e.target.getAttribute('data-c'); if (!c) return;
+    S.form[c] = e.target.checked; save();
+    var err = e.target.closest('.consent').querySelector('.err'); if (err && c === 'consent_pd') err.remove();
   });
   app.addEventListener('input', function (e) {
     var f = e.target.getAttribute('data-f'); if (!f) return;
@@ -787,6 +807,12 @@
     });
     if (firstBad) { firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' }); haptic(); return; }
     if (S.step < FORM.length - 1) { S.step++; save(); go('form'); return; }
+    if (!S.form.consent_pd) {
+      var cb = app.querySelector('.consent');
+      if (cb && !cb.querySelector('.err')) cb.insertAdjacentHTML('beforeend', '<p class="err">Без согласия на обработку данных анкету не отправить</p>');
+      if (cb) cb.scrollIntoView({ behavior: 'smooth', block: 'center' }); haptic(); return;
+    }
+    S.form.consent_ads = !!S.form.consent_ads; S.form.consent_ts = new Date().toISOString(); S.form.consent_rev = CONFIG.docsRev; save();
     var btn = app.querySelector('[data-act="form-next"]'); if (btn) { btn.disabled = true; btn.textContent = 'Отправляю…'; }
     send('lead').then(function () { S.sent.lead = true; save(); haptic('ok'); go('done'); });
   }
