@@ -1,8 +1,8 @@
 /**
  * Бэкенд теста «Какой ты блогер» (Карина, Kerry Catt).
- * Принимает POST из мини-аппа и пишет строки в эту таблицу:
+ * Принимает POST из мини-аппа и с лендинга Большой Игры и пишет строки в эту таблицу:
  *   лист «Тест»   — каждое прохождение теста;
- *   лист «Анкета» — анкеты предзаписи (лиды).
+ *   лист «Анкета» — анкеты предзаписи из мини-аппа и заявки «Пройти отбор» с лендинга (лиды).
  *
  * Необязательные настройки (Файл → Настройки проекта → Свойства скрипта):
  *   BOT_TOKEN        — токен бота: проверка подписи Телеграма и уведомления;
@@ -27,8 +27,12 @@ const HEAD_LEADS = [
   'Когда готова', 'Вкладываться', 'Формат', 'Результат через 40 дней',
   'Тип блогера', 'Второй тип', 'Состояние',
   'TG id', 'TG ник', 'Проверено TG',
-  'Консультация'
+  'Консультация',
+  'Согласие ПД', 'Согласие на рассылки', 'Время согласия', 'Редакция документов', 'UTM'
 ];
+
+// Заявки с лендинга Большой Игры пишутся в тот же лист «Анкета».
+const SOURCE_BI = 'лендинг Большой Игры';
 
 function setup() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -121,14 +125,43 @@ function doPost(e) {
         a.when, a.invest, a.format, a.result,
         t.type, t.second, t.state,
         tg.id, tg.username ? '@' + tg.username : '', verified,
-        a.consult
+        a.consult,
+        a.consent_pd ? 'да' : '', a.consent_ads ? 'да' : 'нет', a.consent_ts, a.consent_rev, ''
       ]));
       const row = sh.getLastRow();
       if (seg === 'горячая') sh.getRange(row, 1, 1, HEAD_LEADS.length).setBackground('#FBD9D3');
       if (grad) sh.getRange(row, 3).setBackground('#F6EEE2');
-      if (a.consult === 'да, хочу') sh.getRange(row, HEAD_LEADS.length).setFontWeight('bold').setBackground('#FBE8EC');
+      if (a.consult === 'да, хочу') sh.getRange(row, HEAD_LEADS.indexOf('Консультация') + 1).setFontWeight('bold').setBackground('#FBE8EC');
       notify_(seg, grad, a, t);
       return json_({ ok: true, segment: seg });
+    }
+
+    // Заявка «Пройти отбор» с лендинга Большой Игры. Человек сам выбрал тариф и ждёт связи, поэтому сегмент горячий.
+    if (d.kind === 'bi') {
+      if (d.hp) return json_({ ok: true });
+      const b = d.lead || {};
+      if (!String(b.name || '').trim() || !String(b.phone || '').trim() || !b.consent_pd) {
+        return json_({ ok: false, error: 'missing fields' });
+      }
+      const sh = sheet_(ss, SHEET_LEADS, HEAD_LEADS);
+      const r = HEAD_LEADS.map(function () { return ''; });
+      const set = function (col, v) { r[HEAD_LEADS.indexOf(col)] = v; };
+      set('Дата', now);
+      set('Сегмент', 'горячая');
+      set('Источник', SOURCE_BI);
+      set('Имя', b.name);
+      set('Ник в Телеграме', b.tgNick);
+      set('Телефон', b.phone);
+      set('Формат', b.tariff);
+      set('Согласие ПД', 'да');
+      set('Согласие на рассылки', b.consent_ads ? 'да' : 'нет');
+      set('Время согласия', b.consent_ts);
+      set('Редакция документов', b.consent_rev);
+      set('UTM', b.utm);
+      sh.appendRow(clean_(r));
+      sh.getRange(sh.getLastRow(), 1, 1, HEAD_LEADS.length).setBackground('#FBD9D3');
+      notifyBi_(b);
+      return json_({ ok: true });
     }
 
     return json_({ ok: false, error: 'unknown kind' });
@@ -171,6 +204,28 @@ function notify_(seg, grad, a, t) {
     `Тип блогера: ${t.type || '—'}`,
     `Формат: ${a.format || '—'}`,
     `Хочет через 40 дней: ${a.result || '—'}`
+  ];
+  try {
+    UrlFetchApp.fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify({ chat_id: chat, text: lines.join('\n') }),
+      muteHttpExceptions: true
+    });
+  } catch (e) { /* уведомление не критично */ }
+}
+
+function notifyBi_(b) {
+  const props = PropertiesService.getScriptProperties();
+  const token = props.getProperty('BOT_TOKEN');
+  const chat = props.getProperty('MANAGER_CHAT_ID');
+  if (!token || !chat) return;
+  const lines = [
+    '🔥 Заявка с лендинга Большой Игры',
+    `Тариф: ${b.tariff || '—'}`,
+    `Имя: ${b.name || ''}`,
+    `Телефон: ${b.phone || '—'}`,
+    `Телеграм: ${b.tgNick || '—'}`
   ];
   try {
     UrlFetchApp.fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
