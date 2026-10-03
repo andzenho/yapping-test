@@ -2,7 +2,8 @@
  * Бэкенд теста «Какой ты блогер» (Карина, Kerry Catt).
  * Принимает POST из мини-аппа и с лендинга Большой Игры и пишет строки в эту таблицу:
  *   лист «Тест»   — каждое прохождение теста;
- *   лист «Анкета» — анкеты предзаписи из мини-аппа и заявки «Пройти отбор» с лендинга (лиды).
+ *   лист «Анкета» — анкеты предзаписи из мини-аппа (лиды);
+ *   лист «Заявки Большая Игра» — заявки «Пройти отбор» с лендинга Большой Игры.
  *
  * Необязательные настройки (Файл → Настройки проекта → Свойства скрипта):
  *   BOT_TOKEN        — токен бота: проверка подписи Телеграма и уведомления;
@@ -31,13 +32,19 @@ const HEAD_LEADS = [
   'Согласие ПД', 'Согласие на рассылки', 'Время согласия', 'Редакция документов', 'UTM'
 ];
 
-// Заявки с лендинга Большой Игры пишутся в тот же лист «Анкета».
-const SOURCE_BI = 'лендинг Большой Игры';
+// Заявки с лендинга Большой Игры лежат на отдельном листе. «Статус» и «Комментарий» заполняет менеджер.
+const SHEET_BI = 'Заявки Большая Игра';
+const HEAD_BI = [
+  'Дата', 'Тариф', 'Имя', 'Телефон', 'Ник в Телеграме', 'UTM',
+  'Согласие ПД', 'Согласие на рассылки', 'Время согласия', 'Редакция документов', 'Страница',
+  'Статус', 'Комментарий'
+];
 
 function setup() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   sheet_(ss, SHEET_TEST, HEAD_TEST);
   sheet_(ss, SHEET_LEADS, HEAD_LEADS);
+  sheet_(ss, SHEET_BI, HEAD_BI);
   const first = ss.getSheets()[0];
   if (first.getName() !== SHEET_TEST && first.getName() !== SHEET_LEADS && first.getLastRow() === 0) {
     ss.deleteSheet(first);
@@ -136,30 +143,19 @@ function doPost(e) {
       return json_({ ok: true, segment: seg });
     }
 
-    // Заявка «Пройти отбор» с лендинга Большой Игры. Человек сам выбрал тариф и ждёт связи, поэтому сегмент горячий.
+    // Заявка «Пройти отбор» с лендинга Большой Игры.
     if (d.kind === 'bi') {
       if (d.hp) return json_({ ok: true });
       const b = d.lead || {};
       if (!String(b.name || '').trim() || !String(b.phone || '').trim() || !b.consent_pd) {
         return json_({ ok: false, error: 'missing fields' });
       }
-      const sh = sheet_(ss, SHEET_LEADS, HEAD_LEADS);
-      const r = HEAD_LEADS.map(function () { return ''; });
-      const set = function (col, v) { r[HEAD_LEADS.indexOf(col)] = v; };
-      set('Дата', now);
-      set('Сегмент', 'горячая');
-      set('Источник', SOURCE_BI);
-      set('Имя', b.name);
-      set('Ник в Телеграме', b.tgNick);
-      set('Телефон', b.phone);
-      set('Формат', b.tariff);
-      set('Согласие ПД', 'да');
-      set('Согласие на рассылки', b.consent_ads ? 'да' : 'нет');
-      set('Время согласия', b.consent_ts);
-      set('Редакция документов', b.consent_rev);
-      set('UTM', b.utm);
-      sh.appendRow(clean_(r));
-      sh.getRange(sh.getLastRow(), 1, 1, HEAD_LEADS.length).setBackground('#FBD9D3');
+      const sh = sheet_(ss, SHEET_BI, HEAD_BI);
+      sh.appendRow(clean_([
+        now, b.tariff, b.name, b.phone, b.tgNick, b.utm,
+        'да', b.consent_ads ? 'да' : 'нет', b.consent_ts, b.consent_rev, d.page,
+        '', ''
+      ]));
       notifyBi_(b);
       return json_({ ok: true });
     }
