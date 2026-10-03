@@ -37,7 +37,8 @@ const SHEET_BI = 'Заявки Большая Игра';
 const HEAD_BI = [
   'Дата', 'Тариф', 'Имя', 'Телефон', 'Ник в Телеграме', 'UTM',
   'Согласие ПД', 'Согласие на рассылки', 'Время согласия', 'Редакция документов', 'Страница',
-  'Статус', 'Комментарий'
+  'Статус', 'Комментарий',
+  'Оферта принята', 'Кнопка оплаты'
 ];
 
 function setup() {
@@ -154,9 +155,24 @@ function doPost(e) {
       sh.appendRow(clean_([
         now, b.tariff, b.name, b.phone, b.tgNick, b.utm,
         'да', b.consent_ads ? 'да' : 'нет', b.consent_ts, b.consent_rev, d.page,
-        '', ''
+        '', '', '', ''
       ]));
       notifyBi_(b);
+      return json_({ ok: true, row: sh.getLastRow() });
+    }
+
+    // После заявки человек принял оферту и нажал кнопку оплаты. Дописываем это в его строку.
+    // Строку сверяем по телефону, чтобы чужой запрос не поменял чужую заявку.
+    if (d.kind === 'bi_pay') {
+      const sh = ss.getSheetByName(SHEET_BI);
+      const row = parseInt(d.row, 10);
+      const digits = function (v) { return String(v || '').replace(/\D/g, ''); };
+      if (!sh || !(row > 1) || row > sh.getLastRow()) return json_({ ok: false, error: 'no row' });
+      const phone = sh.getRange(row, HEAD_BI.indexOf('Телефон') + 1).getValue();
+      if (!digits(d.phone) || digits(phone) !== digits(d.phone)) return json_({ ok: false, error: 'no match' });
+      const method = d.method === 'intl' ? 'зарубежная' : 'рубли';
+      sh.getRange(row, HEAD_BI.indexOf('Оферта принята') + 1, 1, 2)
+        .setValues([clean_([String(d.offer_ts || '') + ' · ред. ' + String(d.offer_rev || ''), method])]);
       return json_({ ok: true });
     }
 
