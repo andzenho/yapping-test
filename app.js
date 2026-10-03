@@ -13,7 +13,7 @@
     teamUrl: 'https://t.me/kerryhelper',
     gameStart: '16 ноября',
     // Документы (редакция от 02.10.2026). Галки на последнем шаге анкеты.
-    docs: 'https://andzenho.github.io/razminka-landing/',
+    docs: 'https://andzenho.github.io/kerrycatt/',
     docsRev: '2026-10-02'
   };
 
